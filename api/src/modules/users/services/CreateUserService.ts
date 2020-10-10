@@ -9,6 +9,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 type CreateUserRequest = {
   name: string;
   email: string;
+  username: string;
   password: string;
 };
 
@@ -22,6 +23,7 @@ class CreateUserService {
   public async execute({
     name,
     email,
+    username,
     password,
   }: CreateUserRequest): Promise<User> {
     const userExist = await this.usersRepository.findByEmail(email);
@@ -34,6 +36,7 @@ class CreateUserService {
     const user = await this.usersRepository.create({
       name,
       email,
+      username,
       password: hashedPassword,
     });
 

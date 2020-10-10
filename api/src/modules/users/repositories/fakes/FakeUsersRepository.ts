@@ -17,6 +17,11 @@ class FakeUsesRepository implements IUsersRepository {
     return findUser;
   }
 
+  public async findByUsername(username: string): Promise<User | undefined> {
+    const findUser = this.users.find(user => user.username === username);
+    return findUser;
+  }
+
   public async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User();
     Object.assign(user, { id: uuid(), ...userData });

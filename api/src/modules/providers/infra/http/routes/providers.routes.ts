@@ -12,7 +12,7 @@ const providerConfigurationController = new ProviderConfigurationController();
 providersRouter.use(ensureAuthenticated);
 providersRouter.use('/workschedules', workSchedulesRouter);
 
-providersRouter.get('/:provider_id', providerProfileController.index);
+providersRouter.get('/:provider_id', providerProfileController.show);
 providersRouter.post('/', providerConfigurationController.create);
 
 export default providersRouter;
