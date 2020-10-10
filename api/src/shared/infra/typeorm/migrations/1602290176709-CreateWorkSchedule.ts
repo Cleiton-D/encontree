@@ -21,7 +21,7 @@ export default class CreateWorkSchedule1602290176709
           {
             name: 'day',
             type: 'enum',
-            enum: ['dom', 'seg', 'ter', 'qua', 'quin', 'sex', 'sab'],
+            enum: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'],
           },
           {
             name: 'inicio',

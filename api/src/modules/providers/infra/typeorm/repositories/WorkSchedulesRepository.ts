@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IWorkScheduleRepository from '@modules/providers/repositories/IWorkScheduleRepository';
+import IWorkScheduleRepository from '@modules/providers/repositories/IWorkSchedulesRepository';
 import CreateWorkScheduleDTO from '@modules/providers/dtos/CreateWorkScheduleDTO';
 import WorkSchedule from '../entities/WorkSchedule';
 
-class WorkScheduleRepository implements IWorkScheduleRepository {
+class WorkSchedulesRepository implements IWorkScheduleRepository {
   private ormRepository: Repository<WorkSchedule>;
 
   constructor() {
@@ -30,9 +30,24 @@ class WorkScheduleRepository implements IWorkScheduleRepository {
     return workSchedule;
   }
 
+  public async createMany(
+    items: CreateWorkScheduleDTO[],
+  ): Promise<WorkSchedule[]> {
+    const workSchedules = items.map<WorkSchedule>(item =>
+      this.ormRepository.create(item),
+    );
+    await this.ormRepository.save(workSchedules);
+
+    return workSchedules;
+  }
+
   public async update(workSchedule: WorkSchedule): Promise<WorkSchedule> {
     return this.ormRepository.save(workSchedule);
   }
+
+  public async updateMany(items: WorkSchedule[]): Promise<WorkSchedule[]> {
+    return this.ormRepository.save(items);
+  }
 }
 
-export default WorkScheduleRepository;
+export default WorkSchedulesRepository;

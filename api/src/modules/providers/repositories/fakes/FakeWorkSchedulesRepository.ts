@@ -2,9 +2,9 @@ import { uuid } from 'uuidv4';
 
 import CreateWorkScheduleDTO from '@modules/providers/dtos/CreateWorkScheduleDTO';
 import WorkSchedule from '@modules/providers/infra/typeorm/entities/WorkSchedule';
-import IWorkScheduleRepository from '../IWorkScheduleRepository';
+import IWorkScheduleRepository from '../IWorkSchedulesRepository';
 
-class FakeWorkScheduleRepository implements IWorkScheduleRepository {
+class FakeWorkSchedulesRepository implements IWorkScheduleRepository {
   private workSchedules: WorkSchedule[] = [];
 
   public async findById(id: string): Promise<WorkSchedule | undefined> {
@@ -26,6 +26,19 @@ class FakeWorkScheduleRepository implements IWorkScheduleRepository {
     return workSchedule;
   }
 
+  public async createMany(
+    items: CreateWorkScheduleDTO[],
+  ): Promise<WorkSchedule[]> {
+    const schedules = items.map(item => {
+      const workSchedule = new WorkSchedule();
+      Object.assign(workSchedule, { id: uuid(), ...item });
+      return workSchedule;
+    });
+
+    this.workSchedules.push(...schedules);
+    return schedules;
+  }
+
   public async update(workSchedule: WorkSchedule): Promise<WorkSchedule> {
     const findIndex = this.workSchedules.findIndex(
       findWorkSchedule => findWorkSchedule.id === workSchedule.id,
@@ -34,6 +47,14 @@ class FakeWorkScheduleRepository implements IWorkScheduleRepository {
 
     return workSchedule;
   }
+
+  public async updateMany(items: WorkSchedule[]): Promise<WorkSchedule[]> {
+    items.forEach(item => {
+      const index = this.workSchedules.findIndex(ws => ws.id === item.id);
+      this.workSchedules[index] = item;
+    });
+    return items;
+  }
 }
 
-export default FakeWorkScheduleRepository;
+export default FakeWorkSchedulesRepository;

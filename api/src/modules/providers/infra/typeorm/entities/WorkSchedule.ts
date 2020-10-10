@@ -32,6 +32,9 @@ class WorkSchedule {
   @Column()
   fim: number;
 
+  @Column()
+  disabled: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
