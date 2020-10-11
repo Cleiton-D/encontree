@@ -4,6 +4,7 @@ import ISchedulesRepository from '@modules/schedules/repositories/ISchedulesRepo
 import CreateScheduleDTO from '@modules/schedules/dtos/CreateScheduleDTO';
 import FindInMonthByProviderDTO from '@modules/schedules/dtos/FindInMonthByProviderDTO';
 import FindInDayByProviderDTO from '@modules/schedules/dtos/FindInDayByProviderDTO';
+import FindInDayByUserDTO from '@modules/schedules/dtos/FindInDayByUserDTO';
 import Schedule from '../entities/Schedule';
 
 class SchedulesRepository implements ISchedulesRepository {
@@ -17,6 +18,13 @@ class SchedulesRepository implements ISchedulesRepository {
     const schedule = this.ormRepository.create(data);
     await this.ormRepository.save(schedule);
 
+    return schedule;
+  }
+
+  public async findById(schedule_id: string): Promise<Schedule | undefined> {
+    const schedule = await this.ormRepository.findOne(schedule_id, {
+      relations: ['provider'],
+    });
     return schedule;
   }
 
@@ -62,6 +70,28 @@ class SchedulesRepository implements ISchedulesRepository {
     const schedules = await this.ormRepository.find({
       where: {
         provider_id,
+        date: Raw(
+          field =>
+            `to_char(${field}, 'DD-MM-YYYY') = '${dayStr}-${monthStr}-${year}'`,
+        ),
+      },
+    });
+
+    return schedules;
+  }
+
+  public async findInDayByUser({
+    user_id,
+    day,
+    month,
+    year,
+  }: FindInDayByUserDTO): Promise<Schedule[]> {
+    const dayStr = String(day).padStart(2, '0');
+    const monthStr = String(month).padStart(2, '0');
+
+    const schedules = await this.ormRepository.find({
+      where: {
+        user_id,
         date: Raw(
           field =>
             `to_char(${field}, 'DD-MM-YYYY') = '${dayStr}-${monthStr}-${year}'`,

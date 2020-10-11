@@ -5,6 +5,7 @@ import CreateScheduleDTO from '@modules/schedules/dtos/CreateScheduleDTO';
 import Schedule from '@modules/schedules/infra/typeorm/entities/Schedule';
 import FindInMonthByProviderDTO from '@modules/schedules/dtos/FindInMonthByProviderDTO';
 import FindInDayByProviderDTO from '@modules/schedules/dtos/FindInDayByProviderDTO';
+import FindInDayByUserDTO from '@modules/schedules/dtos/FindInDayByUserDTO';
 import ISchedulesRepository from '../ISchedulesRepository';
 
 class FakeSchedulesRepository implements ISchedulesRepository {
@@ -16,6 +17,10 @@ class FakeSchedulesRepository implements ISchedulesRepository {
 
     this.schedules.push(schedule);
     return schedule;
+  }
+
+  public async findById(schedule_id: string): Promise<Schedule | undefined> {
+    return this.schedules.find(item => item.id === schedule_id);
   }
 
   public async findByDate(
@@ -56,6 +61,23 @@ class FakeSchedulesRepository implements ISchedulesRepository {
         item.date.getMonth() + 1 === month &&
         item.date.getFullYear() === year &&
         item.provider_id === provider_id,
+    );
+
+    return schedules;
+  }
+
+  public async findInDayByUser({
+    user_id,
+    day,
+    month,
+    year,
+  }: FindInDayByUserDTO): Promise<Schedule[]> {
+    const schedules = this.schedules.filter(
+      item =>
+        item.date.getDate() === day &&
+        item.date.getMonth() + 1 === month &&
+        item.date.getFullYear() === year &&
+        item.user_id === user_id,
     );
 
     return schedules;

@@ -1,10 +1,13 @@
 import CreateScheduleDTO from '../dtos/CreateScheduleDTO';
 import FindInDayByProviderDTO from '../dtos/FindInDayByProviderDTO';
+import FindInDayByUserDTO from '../dtos/FindInDayByUserDTO';
 import FindInMonthByProviderDTO from '../dtos/FindInMonthByProviderDTO';
+
 import Schedule from '../infra/typeorm/entities/Schedule';
 
 export default interface ISchedulesRepository {
   create: (data: CreateScheduleDTO) => Promise<Schedule>;
+  findById: (schedule_id: string) => Promise<Schedule | undefined>;
   findByDate: (
     date: Date,
     provider_id: string,
@@ -13,4 +16,5 @@ export default interface ISchedulesRepository {
     data: FindInMonthByProviderDTO,
   ) => Promise<Schedule[]>;
   findInDayByProvider: (data: FindInDayByProviderDTO) => Promise<Schedule[]>;
+  findInDayByUser: (data: FindInDayByUserDTO) => Promise<Schedule[]>;
 }
