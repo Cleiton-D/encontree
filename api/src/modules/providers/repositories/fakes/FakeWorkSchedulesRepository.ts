@@ -2,6 +2,7 @@ import { uuid } from 'uuidv4';
 
 import CreateWorkScheduleDTO from '@modules/providers/dtos/CreateWorkScheduleDTO';
 import WorkSchedule from '@modules/providers/infra/typeorm/entities/WorkSchedule';
+import FindByProviderAndDayDTO from '@modules/providers/dtos/FindByProviderAndDayDTO';
 import IWorkScheduleRepository from '../IWorkSchedulesRepository';
 
 class FakeWorkSchedulesRepository implements IWorkScheduleRepository {
@@ -9,6 +10,17 @@ class FakeWorkSchedulesRepository implements IWorkScheduleRepository {
 
   public async findById(id: string): Promise<WorkSchedule | undefined> {
     const workSchedule = this.workSchedules.find(ws => ws.id === id);
+    return workSchedule;
+  }
+
+  public async findByProviderAndDay({
+    providerId,
+    day,
+  }: FindByProviderAndDayDTO): Promise<WorkSchedule | undefined> {
+    const workSchedule = this.workSchedules.find(
+      ws => ws.day === day && ws.provider_id === providerId,
+    );
+
     return workSchedule;
   }
 

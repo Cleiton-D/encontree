@@ -12,6 +12,9 @@ import ProvidersRepository from '@modules/providers/infra/typeorm/repositories/P
 import IWorkSchedulesRepository from '@modules/providers/repositories/IWorkSchedulesRepository';
 import WorkSchedulesRepository from '@modules/providers/infra/typeorm/repositories/WorkSchedulesRepository';
 
+import ISchedulesRepository from '@modules/schedules/repositories/ISchedulesRepository';
+import SchedulesRepository from '@modules/schedules/infra/typeorm/repositories/SchedulesRepositories';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -25,4 +28,9 @@ container.registerSingleton<IProvidersRepository>(
 container.registerSingleton<IWorkSchedulesRepository>(
   'WorkSchedulesRepository',
   WorkSchedulesRepository,
+);
+
+container.registerSingleton<ISchedulesRepository>(
+  'SchedulesRepository',
+  SchedulesRepository,
 );

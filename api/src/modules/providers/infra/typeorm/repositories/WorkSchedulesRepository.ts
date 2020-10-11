@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import IWorkScheduleRepository from '@modules/providers/repositories/IWorkSchedulesRepository';
 import CreateWorkScheduleDTO from '@modules/providers/dtos/CreateWorkScheduleDTO';
+import FindByProviderAndDayDTO from '@modules/providers/dtos/FindByProviderAndDayDTO';
 import WorkSchedule from '../entities/WorkSchedule';
 
 class WorkSchedulesRepository implements IWorkScheduleRepository {
@@ -13,6 +14,17 @@ class WorkSchedulesRepository implements IWorkScheduleRepository {
 
   public async findById(id: string): Promise<WorkSchedule | undefined> {
     const workSchedule = await this.ormRepository.findOne(id);
+    return workSchedule;
+  }
+
+  public async findByProviderAndDay({
+    day,
+    providerId,
+  }: FindByProviderAndDayDTO): Promise<WorkSchedule | undefined> {
+    const workSchedule = await this.ormRepository.findOne({
+      where: { provider_id: providerId, day },
+    });
+
     return workSchedule;
   }
 
