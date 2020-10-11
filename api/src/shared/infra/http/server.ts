@@ -1,36 +1,11 @@
-import 'reflect-metadata';
-import 'dotenv/config';
+import http from 'http';
 
-import express, { NextFunction, Request, Response } from 'express';
-import 'express-async-errors';
+import app from './app';
+import socket from './socket';
 
-import '@shared/infra/typeorm';
-import '@shared/container';
-import AppError from '@shared/errors/AppError';
-import routes from './routes';
+const server = http.createServer(app);
+socket(server);
 
-const app = express();
-
-app.use(express.json());
-app.get('/', (req, res) => {
-  return res.json({ message: 'Server online' });
-});
-
-app.use(routes);
-
-app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
-    return response
-      .status(err.statusCode)
-      .json({ status: 'error', message: err.message });
-  }
-
-  console.error(err);
-  return response
-    .status(500)
-    .json({ status: 'error', message: 'Internal server error' });
-});
-
-app.listen(3333, () => {
-  console.log('Server started on port 3333');
+server.listen(3333, () => {
+  console.log('Server online in port 3333');
 });
