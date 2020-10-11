@@ -1,4 +1,10 @@
-import { FindConditions, getRepository, Not, Repository } from 'typeorm';
+import {
+  Brackets,
+  EntityManager,
+  getManager,
+  getRepository,
+  Repository,
+} from 'typeorm';
 
 import CreateProviderDTO from '@modules/providers/dtos/CreateProviderDTO';
 import FindAllProvidersDTO from '@modules/providers/dtos/FindAllProvidersDTO';
@@ -9,8 +15,11 @@ import Provider from '../entities/Provider';
 class ProvidersRepository implements IProvidersRepository {
   private ormRepository: Repository<Provider>;
 
+  private ormManager: EntityManager;
+
   constructor() {
     this.ormRepository = getRepository(Provider);
+    this.ormManager = getManager();
   }
 
   public async findById(id: string): Promise<Provider | undefined> {
@@ -29,13 +38,40 @@ class ProvidersRepository implements IProvidersRepository {
   public async findAllProviders({
     except_provider_id,
     category_id,
+    search,
   }: FindAllProvidersDTO): Promise<Provider[]> {
-    const where: FindConditions<Provider> = {};
+    const queryBuilder = this.ormManager
+      .createQueryBuilder()
+      .select('providers')
+      .from(Provider, 'providers')
+      .innerJoinAndSelect('providers.user', 'user')
+      .where('1 = 1');
 
-    if (except_provider_id) where.id = Not(except_provider_id);
-    if (category_id) where.category_id = category_id;
+    if (except_provider_id) {
+      queryBuilder.andWhere('providers.id != :exceptProvider', {
+        exceptProvider: except_provider_id,
+      });
+    }
 
-    return this.ormRepository.find({ where, relations: ['user'] });
+    if (category_id) {
+      queryBuilder.andWhere('providers.category_id = :category', {
+        category: category_id,
+      });
+    }
+
+    if (search) {
+      queryBuilder.andWhere(
+        new Brackets(qb => {
+          qb.where('lower(user.name) LIKE lower(:search)', {
+            search: `%${search}%`,
+          }).orWhere('lower(user.username) LIKE lower(:search)', {
+            search: `%${search}%`,
+          });
+        }),
+      );
+    }
+
+    return queryBuilder.getMany();
   }
 
   public async create(data: CreateProviderDTO): Promise<Provider> {
