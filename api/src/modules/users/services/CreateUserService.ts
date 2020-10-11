@@ -26,9 +26,16 @@ class CreateUserService {
     username,
     password,
   }: CreateUserRequest): Promise<User> {
-    const userExist = await this.usersRepository.findByEmail(email);
-    if (userExist) {
+    const existUserWithEmail = await this.usersRepository.findByEmail(email);
+    if (existUserWithEmail) {
       throw new AppError('Email address already used');
+    }
+
+    const existUserWithUsername = await this.usersRepository.findByUsername(
+      username,
+    );
+    if (existUserWithUsername) {
+      throw new AppError('Username already used');
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);

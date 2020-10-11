@@ -2,6 +2,7 @@ import { uuid } from 'uuidv4';
 
 import Provider from '@modules/providers/infra/typeorm/entities/Provider';
 import CreateProviderDTO from '@modules/providers/dtos/CreateProviderDTO';
+import FindAllProvidersDTO from '@modules/providers/dtos/FindAllProvidersDTO';
 import IProvidersRepository from '../IProvidersRepository';
 
 class FakeProvidersRepository implements IProvidersRepository {
@@ -17,6 +18,27 @@ class FakeProvidersRepository implements IProvidersRepository {
       provider => provider.user_id === userId,
     );
     return findProvider;
+  }
+
+  public async findAllProviders({
+    except_provider_id,
+    category_id,
+  }: FindAllProvidersDTO): Promise<Provider[]> {
+    let providers: Provider[] = [];
+
+    if (except_provider_id) {
+      providers = this.providers.filter(
+        provider => provider.id !== except_provider_id,
+      );
+    } else {
+      providers = this.providers;
+    }
+
+    if (category_id) {
+      return providers.filter(provider => provider.category_id === category_id);
+    }
+
+    return providers;
   }
 
   public async create(data: CreateProviderDTO): Promise<Provider> {
