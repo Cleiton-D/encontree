@@ -40,12 +40,13 @@ export default createGlobalStyle`
     font-size: 62.5%;
   }
 
-  h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 500;
+  body {
+    height: 100vh;
   }
 
-  button {
-    cursor: pointer;
+  #root {
+    height: 100%;
+    padding: 15px;
   }
 
   ${({ theme }) => css`
@@ -53,6 +54,20 @@ export default createGlobalStyle`
     input,
     button {
       font-family: ${theme.font.family};
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong {
+      font-weight: ${theme.font.bold};
+    }
+
+    button {
+      cursor: pointer;
     }
   `}
 
