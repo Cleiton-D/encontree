@@ -17,9 +17,6 @@ export const Container = styled.main`
 `;
 
 export const Content = styled.section`
-  position: relative;
-  top: 3rem;
-
   > img {
     display: block;
     margin: 0 auto;
@@ -46,7 +43,7 @@ export const FormWrapper = styled.div`
   > span {
     display: inline-block;
     margin: 0 auto;
-    margin-top: 8rem;
+    margin-top: 5rem;
     color: #666;
     font-weight: ${theme.font.medium};
     font-size: 1.6rem;
