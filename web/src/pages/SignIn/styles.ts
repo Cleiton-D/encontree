@@ -8,12 +8,17 @@ import signBackgroundImage from '../../assets/login_web.svg';
 import theme from '../../styles/theme';
 
 export const Container = styled.main`
-  background-color: #f2f5fc;
-  height: 100%;
-  border-radius: 2.5rem;
   padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  height: 100%;
+
+  > div {
+    background-color: #f2f5fc;
+    height: 100%;
+    border-radius: 2.5rem;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const Content = styled.section`

@@ -50,46 +50,48 @@ const SignUp = (): JSX.Element => {
 
   return (
     <Container>
-      <Background />
-      <Content>
-        <img
-          src={logo}
-          alt="Duas setas de direcionamento seguidas da palavra encontree"
-        />
-        <FormWrapper>
-          <h1>Faça seu cadastro</h1>
-          <Form onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              label="Nome"
-              name="name"
-              placeholder="Digite seu nome"
-            />
-            <Input
-              type="text"
-              label="Email"
-              name="email"
-              placeholder="Digite seu email"
-            />
-            <Input
-              type="text"
-              label="Nome de usuário"
-              name="username"
-              placeholder="Digite um nome de usuário"
-            />
-            <Input
-              type="password"
-              label="Senha"
-              name="password"
-              placeholder="Crie uma senha"
-            />
-            <Button type="submit">Criar conta</Button>
-          </Form>
-          <span>
-            Já tem uma conta? <Link to="/">Entrar</Link>
-          </span>
-        </FormWrapper>
-      </Content>
+      <div>
+        <Background />
+        <Content>
+          <img
+            src={logo}
+            alt="Duas setas de direcionamento seguidas da palavra encontree"
+          />
+          <FormWrapper>
+            <h1>Faça seu cadastro</h1>
+            <Form onSubmit={handleSubmit}>
+              <Input
+                type="text"
+                label="Nome"
+                name="name"
+                placeholder="Digite seu nome"
+              />
+              <Input
+                type="text"
+                label="Email"
+                name="email"
+                placeholder="Digite seu email"
+              />
+              <Input
+                type="text"
+                label="Nome de usuário"
+                name="username"
+                placeholder="Digite um nome de usuário"
+              />
+              <Input
+                type="password"
+                label="Senha"
+                name="password"
+                placeholder="Crie uma senha"
+              />
+              <Button type="submit">Criar conta</Button>
+            </Form>
+            <span>
+              Já tem uma conta? <Link to="/">Entrar</Link>
+            </span>
+          </FormWrapper>
+        </Content>
+      </div>
     </Container>
   );
 };

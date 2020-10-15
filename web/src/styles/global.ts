@@ -45,8 +45,9 @@ export default createGlobalStyle`
   }
 
   #root {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    padding: 15px;
   }
 
   ${({ theme }) => css`
