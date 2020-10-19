@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 export const Container = styled.header`
-  height: 10rem;
+  grid-area: 'header';
 `;
 
 export const Content = styled.div`
@@ -16,7 +16,7 @@ export const Content = styled.div`
   padding: 0 4.5rem;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
   background: url(${logo}) no-repeat center;
   width: 23rem;
   height: 5rem;

@@ -5,30 +5,29 @@ import { Container as InputContainer } from '../../components/Input/styles';
 import { Container as ButtonContainer } from '../../components/Button/styles';
 
 import signBackgroundImage from '../../assets/login_web.svg';
+import logo from '../../assets/logo.png';
+
 import theme from '../../styles/theme';
 
-export const Container = styled.main`
-  padding: 1.5rem;
+export const Container = styled.section`
   height: 100%;
-
-  > div {
-    background-color: #f2f5fc;
-    height: 100%;
-    border-radius: 2.5rem;
-    padding: 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
-export const Content = styled.section`
+export const Content = styled.div`
   position: relative;
-  top: 3rem;
+  top: 4rem;
+`;
 
-  > img {
-    display: block;
-    margin: 0 auto;
-  }
+export const Logo = styled.div`
+  display: block;
+  margin: 0 auto;
+  background: url(${logo}) no-repeat center;
+  width: 29rem;
+  height: 6rem;
+  background-size: cover;
+  margin-bottom: 5rem;
 `;
 
 export const FormWrapper = styled.div`

@@ -45,9 +45,12 @@ export default createGlobalStyle`
   }
 
   #root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    display: grid;
+    grid-template-areas:
+      'header'
+      'main'
+    ;
+    grid-template-rows: 10rem 1fr;
   }
 
   ${({ theme }) => css`

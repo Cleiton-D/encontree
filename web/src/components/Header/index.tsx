@@ -22,7 +22,7 @@ const Header = (): JSX.Element => {
   return (
     <Container>
       <Content>
-        <Logo />
+        <Logo to="/dashboard" />
         <Navigation>
           <Notifications>
             <FiBell size={26} color="#000" />
@@ -32,7 +32,7 @@ const Header = (): JSX.Element => {
               <Username>
                 Olá, <strong>Cleiton</strong>
               </Username>
-              <ProfileLink to="#">Meu perfil</ProfileLink>
+              <ProfileLink to="profile">Meu perfil</ProfileLink>
             </UserInfo>
             <UserAvatar avatarUrl={user.avatar_url} />
           </UserContent>

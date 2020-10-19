@@ -7,9 +7,14 @@ import Button from '../../components/Button';
 
 import { useAuth } from '../../hooks/auth';
 
-import logo from '../../assets/logo.png';
-
-import { Container, Content, FormWrapper, Form, Background } from './styles';
+import {
+  Container,
+  FormWrapper,
+  Form,
+  Background,
+  Content,
+  Logo,
+} from './styles';
 import { useToast } from '../../hooks/toast';
 
 type SignInFormData = {
@@ -47,36 +52,31 @@ const SignIn = (): JSX.Element => {
 
   return (
     <Container>
-      <div>
-        <Background />
-        <Content>
-          <img
-            src={logo}
-            alt="Duas setas de direcionamento seguidas da palavra encontree"
-          />
-          <FormWrapper>
-            <h1>Faça seu login</h1>
-            <Form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                label="Email"
-                name="email"
-                placeholder="Digite seu email"
-              />
-              <Input
-                type="password"
-                label="Senha"
-                name="password"
-                placeholder="Digite sua senha"
-              />
-              <Button type="submit">Entrar</Button>
-            </Form>
-            <span>
-              Ainda não tem uma conta? <Link to="/signup">Registre-se</Link>
-            </span>
-          </FormWrapper>
-        </Content>
-      </div>
+      <Background />
+      <Content>
+        <Logo />
+        <FormWrapper>
+          <h1>Faça seu login</h1>
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              label="Email"
+              name="email"
+              placeholder="Digite seu email"
+            />
+            <Input
+              type="password"
+              label="Senha"
+              name="password"
+              placeholder="Digite sua senha"
+            />
+            <Button type="submit">Entrar</Button>
+          </Form>
+          <span>
+            Ainda não tem uma conta? <Link to="/signup">Registre-se</Link>
+          </span>
+        </FormWrapper>
+      </Content>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { FiClock } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 
 export const Container = styled.div``;
 
@@ -13,12 +13,6 @@ export const PageTitle = styled.h1`
 `;
 
 export const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-`;
-
-export const SchedulesContainer = styled.section`
   width: 77rem;
   background: #fff;
   height: 66rem;
@@ -27,7 +21,7 @@ export const SchedulesContainer = styled.section`
   padding: 4rem;
 `;
 
-export const Schedules = styled.ul`
+export const ChatList = styled.ul`
   display: flex;
   flex-direction: column;
   list-style-type: none;
@@ -43,40 +37,29 @@ export const Schedules = styled.ul`
   }
 `;
 
-export const ScheduleItem = styled.li`
+export const ChatItem = styled.li`
+  display: flex;
+  align-items: center;
+
   width: 58rem;
-  margin-top: 1rem;
   background: #f4f8ff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
   height: 8rem;
   padding: 1.5rem 3rem;
-  display: flex;
-  align-items: center;
   position: relative;
   border-radius: 1rem;
   color: #333;
   cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 
-  & + & {
-    margin-top: 2.6rem;
+  &:not(:first-child) {
+    margin-top: 2rem;
   }
 
-  &:first-child {
-    background: #4285f7;
-    color: #fff;
-    margin-left: 2rem;
-    margin-bottom: 3.2rem;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.75);
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(100% + 2.6rem);
-      width: calc(100% + 6rem);
-      height: 0.05rem;
-      background: #ccc;
-      left: -2rem;
-    }
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -103,23 +86,9 @@ export const ClientName = styled.h2`
   `}
 `;
 
-export const ClockInfo = styled.div`
-  display: flex;
-  align-items: center;
+export const ArrowLeft = styled(FiChevronRight)`
   position: absolute;
-  right: 3rem;
-`;
-
-export const ClockIcon = styled(FiClock)`
-  color: #f7bd43;
-  font-size: 1.6rem;
-  stroke-width: 3;
-  margin-right: 1rem;
-`;
-
-export const ScheduleTime = styled.span`
-  ${({ theme }) => css`
-    font-weight: ${theme.font.medium};
-    font-size: 1.6rem;
-  `}
+  right: 2rem;
+  font-size: 2.4rem;
+  color: #333;
 `;

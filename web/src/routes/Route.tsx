@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Header from '../components/Header';
+import PageContentWrapper from '../components/PageContentWrapper';
 
 import { useAuth } from '../hooks/auth';
 
@@ -23,12 +24,18 @@ const Route = ({ isPrivate = false, ...rest }: RouteProps): JSX.Element => {
       return (
         <>
           <Header />
-          <ReactRouter {...rest} />
+          <PageContentWrapper>
+            <ReactRouter {...rest} />
+          </PageContentWrapper>
         </>
       );
     }
 
-    return <ReactRouter {...rest} />;
+    return (
+      <PageContentWrapper>
+        <ReactRouter {...rest} />
+      </PageContentWrapper>
+    );
   }
 
   return (
