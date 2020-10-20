@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Range } from 'rc-slider';
 import { useField } from '@unform/core';
 
@@ -6,99 +6,81 @@ import 'rc-slider/assets/index.css';
 
 import { Container, RangeContent, NotAvailableLabel } from './styles';
 
-type TimeInputRangeValue = {
-  value: {
-    min: number;
-    max: number;
-    available?: boolean;
-  };
+type TimeInputRangeState = {
+  min: number;
+  max: number;
+  available?: boolean;
 };
 
 type TimeInputRangeProps = {
   name: string;
   label: string;
-  available?: boolean;
 };
 
-const TimeInputRange = ({
-  name,
-  label,
-  available,
-}: TimeInputRangeProps): JSX.Element => {
-  const [isAvailable, setIsAvailable] = useState(available);
-
-  const timeRangeRef = useRef<TimeInputRangeValue>({
-    value: { min: 7, max: 17, available: !!available },
+const TimeInputRange = ({ name, label }: TimeInputRangeProps): JSX.Element => {
+  const [data, setData] = useState<TimeInputRangeState>({
+    min: 7,
+    max: 17,
+    available: true,
   });
 
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, defaultValue: unformDefault, registerField } = useField(
+    name,
+  );
 
   useEffect(() => {
-    registerField({
+    registerField<TimeInputRangeState>({
       name: fieldName,
-      ref: timeRangeRef.current,
+      ref: { value: { ...data } },
       path: 'value',
     });
-  }, [registerField, fieldName]);
+  }, [registerField, fieldName, data]);
+
+  useEffect(() => {
+    if (unformDefault) {
+      setData(unformDefault);
+    }
+  }, [unformDefault]);
 
   const handleChangeTimeRange = useCallback(value => {
     const [min, max] = value;
-    const currentValue = timeRangeRef.current.value;
-    timeRangeRef.current.value = { ...currentValue, min, max };
+    setData(oldState => ({ ...oldState, min, max }));
   }, []);
 
   const handleChangeCheckBox = useCallback(() => {
-    setIsAvailable(oldState => {
-      const currentRefValue = timeRangeRef.current.value;
-      timeRangeRef.current.value = {
-        ...currentRefValue,
-        available: !oldState,
-      };
-
-      return !oldState;
-    });
+    setData(oldState => ({ ...oldState, available: !oldState.available }));
   }, []);
 
   return (
-    <Container available={Number(!isAvailable)}>
+    <Container available={Number(!data.available)}>
       <span>{label}</span>
-      <RangeContent available={Number(!isAvailable)}>
+      <RangeContent available={Number(!data.available)}>
         <Range
-          disabled={!isAvailable}
+          disabled={!data.available}
           min={7}
           max={17}
           marks={{
             '7': '07:00',
-            '7.5': '07:30',
             '8': '08:00',
-            '8.5': '08:30',
             '9': '09:00',
-            '9.5': '09:30',
             '10': '10:00',
-            '10.5': '10:30',
             '11': '11:00',
-            '11.5': '11:30',
             '12': '12:00',
-            '12.5': '12:30',
             '13': '13:00',
-            '13.5': '13:30',
             '14': '14:00',
-            '14.5': '14:30',
             '15': '15:00',
-            '15.5': '15:30',
             '16': '16:00',
-            '16.5': '16:30',
             '17': '17:00',
           }}
-          defaultValue={[7, 17]}
-          step={0.5}
+          value={[data.min, data.max]}
+          step={1}
           onChange={handleChangeTimeRange}
         />
       </RangeContent>
-      <NotAvailableLabel checked={!isAvailable}>
+      <NotAvailableLabel checked={!data.available}>
         <input
           type="checkbox"
-          defaultChecked={available}
+          defaultChecked={data.available}
           onChange={handleChangeCheckBox}
         />
         <span>Não disponível</span>
