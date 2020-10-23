@@ -5,12 +5,16 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
 import { useNavigation } from '@react-navigation/native';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+
+import { useAuth } from '../../hooks/auth';
 
 import logo from '../../assets/logo.png';
 import banner from '../../assets/login_mobile.png';
@@ -26,15 +30,43 @@ import {
   CreateAccountButtonText,
 } from './styles';
 
+type SignInFormData = {
+  email: string;
+  password: string;
+};
+
 const SignIn = (): JSX.Element => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
   const navigation = useNavigation();
+  const { login } = useAuth();
 
   const handleNavigateSignUp = useCallback(() => {
     navigation.navigate('SignUp');
   }, [navigation]);
+
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('Digite um e-mail válido')
+            .required('Informe seu email'),
+          password: Yup.string().required('Informe sua senha'),
+        });
+
+        await schema.validate(data, { abortEarly: false });
+        await login({ email: data.email, password: data.password });
+      } catch (err) {
+        Alert.alert(
+          'Error na autenticação',
+          'Ocorreu um erro ao fazer login, cheque suas credenciais',
+        );
+      }
+    },
+    [login],
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -50,12 +82,7 @@ const SignIn = (): JSX.Element => {
         >
           <Container>
             <LoginImage source={banner} />
-            <FormContainer
-              ref={formRef}
-              onSubmit={data => {
-                console.log(data);
-              }}
-            >
+            <FormContainer ref={formRef} onSubmit={handleSignIn}>
               <Input
                 autoCorrect={false}
                 autoCapitalize="none"
