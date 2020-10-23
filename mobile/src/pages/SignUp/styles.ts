@@ -21,6 +21,7 @@ export const Logo = styled.Image`
 `;
 
 export const LoginImage = styled.Image`
+  margin-top: 30px;
   width: 230px;
   height: 230px;
 `;
