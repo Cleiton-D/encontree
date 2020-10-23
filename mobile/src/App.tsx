@@ -4,16 +4,20 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components/native';
 
+import { AuthProvider } from './hooks/auth';
+
 import theme from './styles/theme';
 
 import Routes from './routes';
 
 const App = (): JSX.Element => (
-  <ThemeProvider theme={theme}>
-    <NavigationContainer>
-      <Routes />
-    </NavigationContainer>
-  </ThemeProvider>
+  <AuthProvider>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </ThemeProvider>
+  </AuthProvider>
 );
 
 export default App;
