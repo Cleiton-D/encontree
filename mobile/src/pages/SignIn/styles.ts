@@ -1,31 +1,32 @@
-import { Platform } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { Form } from '@unform/mobile';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { Platform } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 0 20px ${Platform.OS === 'android' ? 150 : 40}px;
+  padding: 0 30px ${Platform.OS === 'android' ? 150 : 40}px;
 `;
 
 export const Logo = styled.Image`
-  margin-top: 10px;
+  position: absolute;
+  top: 10px;
+  align-self: center;
   width: 230px;
   height: 50px;
+  z-index: 2;
 `;
 
 export const LoginImage = styled.Image`
-  margin-top: 70px;
   width: 350px;
   height: 209px;
 `;
 
 export const FormContainer = styled(Form)`
-  flex: 1;
-  justify-content: flex-end;
-  margin-top: 70px;
+  margin-top: 50px;
   width: 100%;
 `;
 
