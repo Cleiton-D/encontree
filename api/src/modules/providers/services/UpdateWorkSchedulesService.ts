@@ -7,8 +7,8 @@ import WorkSchedule from '../infra/typeorm/entities/WorkSchedule';
 
 type WorkScheduleDay = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
 type WorkScheduleRequest = {
-  inicio: number;
-  fim: number;
+  start: number;
+  end: number;
   disabled: boolean;
 };
 
