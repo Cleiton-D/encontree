@@ -1,8 +1,9 @@
 import { Router } from 'express';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import ProviderConfigurationController from '../controllers/ProviderConfigurationController';
 import workSchedulesRouter from './workSchedules.routes';
+
+import ProviderConfigurationController from '../controllers/ProviderConfigurationController';
 import ProviderController from '../controllers/ProviderController';
 import ProviderDaysAvailabilityInMonthController from '../controllers/ProviderDaysAvailableInMonthController';
 
@@ -14,7 +15,8 @@ const providerDaysAvailableInMonthController = new ProviderDaysAvailabilityInMon
 providersRouter.use(ensureAuthenticated);
 providersRouter.use('/workschedules', workSchedulesRouter);
 
-providersRouter.get('/:provider_id', providerController.show);
+providersRouter.get('/show/:provider_id', providerController.show);
+providersRouter.get('/show', providerController.show);
 providersRouter.get('/', providerController.index);
 
 providersRouter.post('/', providerConfigurationController.create);
