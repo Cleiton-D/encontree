@@ -7,10 +7,11 @@ import ListProvidersService from '@modules/providers/services/ListProvidersServi
 
 export default class ProviderController {
   public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
     const { provider_id } = request.params;
 
     const showProvider = container.resolve(ShowProviderService);
-    const provider = await showProvider.execute(provider_id);
+    const provider = await showProvider.execute({ provider_id, user_id });
 
     return response.json(classToClass(provider));
   }
