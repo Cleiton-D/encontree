@@ -1,8 +1,8 @@
 type CreateWorkScheduleDTO = {
   provider_id: string;
   day: 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
-  inicio: number;
-  fim: number;
+  start: number;
+  end: number;
   disabled: boolean;
 };
 
