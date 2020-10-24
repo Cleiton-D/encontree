@@ -4,6 +4,11 @@ import AppError from '@shared/errors/AppError';
 import IProvidersRepository from '../repositories/IProvidersRepository';
 import Provider from '../infra/typeorm/entities/Provider';
 
+type ShowProviderRequest = {
+  provider_id: string;
+  user_id: string;
+};
+
 @injectable()
 class ShowProviderService {
   constructor(
@@ -11,8 +16,17 @@ class ShowProviderService {
     private providersRepository: IProvidersRepository,
   ) {}
 
-  public async execute(providerId: string): Promise<Provider> {
-    const provider = await this.providersRepository.findById(providerId);
+  public async execute({
+    provider_id,
+    user_id,
+  }: ShowProviderRequest): Promise<Provider> {
+    let provider;
+    if (provider_id) {
+      provider = await this.providersRepository.findById(provider_id);
+    } else {
+      provider = await this.providersRepository.findByUserId(user_id);
+    }
+
     if (!provider) {
       throw new AppError('Provider not found');
     }
