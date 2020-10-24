@@ -27,10 +27,10 @@ class WorkSchedule {
   day: Day;
 
   @Column()
-  inicio: number;
+  start: number;
 
   @Column()
-  fim: number;
+  end: number;
 
   @Column()
   disabled: boolean;
