@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
+import { debounce } from 'lodash';
 
 import { useAuth } from '../../../hooks/auth';
 
@@ -13,10 +14,26 @@ import {
   Input,
 } from './styles';
 
-const Header = (): JSX.Element => {
-  const { user, logout } = useAuth();
+type DashboardHeaderProps = {
+  onSearch: (value: string) => void;
+};
 
+const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
+  const { user, logout } = useAuth();
   const fistName = useMemo(() => user.name.split(' ')[0], [user.name]);
+
+  const handleSearch = useCallback(
+    (value: string) => {
+      if (onSearch) {
+        onSearch(value);
+      }
+    },
+    [onSearch],
+  );
+
+  const handleSearchDelayed = useMemo(() => debounce(handleSearch, 1000), [
+    handleSearch,
+  ]);
 
   return (
     <Container>
@@ -33,6 +50,7 @@ const Header = (): JSX.Element => {
           placeholder="Procurar..."
           returnKeyType="search"
           placeholderTextColor="#aaa"
+          onChangeText={handleSearchDelayed}
         />
       </InputContainer>
     </Container>
