@@ -42,7 +42,7 @@ const Profile = (): JSX.Element => {
       <Content>
         <MenuItem
           activeOpacity={0.5}
-          onPress={() => handleNavigate('Dashboard')}
+          onPress={() => handleNavigate('EditProfile')}
         >
           <Icon name="user" size={30} color="#444" />
           <MenuItemText>Meu Perfil</MenuItemText>

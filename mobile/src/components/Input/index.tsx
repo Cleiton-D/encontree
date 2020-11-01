@@ -11,6 +11,9 @@ import { Container, TextInput } from './styles';
 
 type InputProps = TextInputProps & {
   name: string;
+  containerStyle?: {
+    [key: string]: any;
+  };
 };
 
 type InputValueRef = {
@@ -22,7 +25,7 @@ type InputRef = {
 };
 
 const Input = (
-  { name, ...rest }: InputProps,
+  { name, containerStyle, ...rest }: InputProps,
   ref: React.Ref<InputRef>,
 ): JSX.Element => {
   const inputRef = useRef<any>(null);
@@ -53,7 +56,7 @@ const Input = (
   }, [registerField, fieldName]);
 
   return (
-    <Container>
+    <Container style={containerStyle}>
       <TextInput
         ref={inputRef}
         keyboardAppearance="light"

@@ -15,11 +15,8 @@ export const Content = styled.View`
 `;
 
 export const PageTitle = styled.Text`
-  ${({ theme }) => css`
-    font-weight: ${theme.font.bold};
-    font-size: 26px;
-    margin-top: 15px;
-  `}
+  font-size: 26px;
+  margin-top: 15px;
 `;
 
 export const MonthContainer = styled.TouchableOpacity`
