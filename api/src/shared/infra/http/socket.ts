@@ -1,10 +1,17 @@
 import { Server as HttpServer } from 'http';
-import { Server as SocketServer } from 'ws';
+import SocketIO from 'socket.io';
 
 export default function socket(server: HttpServer): void {
-  const wss = new SocketServer({ server });
+  const socketServer = new SocketIO(server);
+  socketServer.on('connection', sock => {
+    console.log(`um carinha conectado ${sock.id}`);
 
-  wss.on('connection', ws => {
-    console.log('É nois', ws);
+    sock.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+
+    sock.on('message', message => {
+      console.log(message);
+    });
   });
 }

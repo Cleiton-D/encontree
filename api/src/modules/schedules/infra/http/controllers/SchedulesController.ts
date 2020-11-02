@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
+import { classToClass } from 'class-transformer';
 import { container } from 'tsyringe';
 
 import CreateScheduleService from '@modules/schedules/services/CreateScheduleService';
 import ShowScheduleService from '@modules/schedules/services/ShowScheduleService';
-import { classToClass } from 'class-transformer';
 
 export default class SchedulesController {
   public async show(request: Request, response: Response): Promise<Response> {
