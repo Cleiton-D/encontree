@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateScheduleService from '@modules/schedules/services/CreateScheduleService';
 import ShowScheduleService from '@modules/schedules/services/ShowScheduleService';
+import { classToClass } from 'class-transformer';
 
 export default class SchedulesController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -12,7 +13,7 @@ export default class SchedulesController {
     const showSchedule = container.resolve(ShowScheduleService);
 
     const schedule = await showSchedule.execute({ user_id, schedule_id });
-    return response.json(schedule);
+    return response.json(classToClass(schedule));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -27,6 +28,6 @@ export default class SchedulesController {
       date,
     });
 
-    return response.json(schedule);
+    return response.json(classToClass(schedule));
   }
 }

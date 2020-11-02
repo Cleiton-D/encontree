@@ -23,7 +23,7 @@ class SchedulesRepository implements ISchedulesRepository {
 
   public async findById(schedule_id: string): Promise<Schedule | undefined> {
     const schedule = await this.ormRepository.findOne(schedule_id, {
-      relations: ['provider'],
+      relations: ['provider', 'provider.category', 'provider.user'],
     });
     return schedule;
   }
@@ -97,6 +97,7 @@ class SchedulesRepository implements ISchedulesRepository {
             `to_char(${field}, 'DD-MM-YYYY') = '${dayStr}-${monthStr}-${year}'`,
         ),
       },
+      relations: ['provider', 'provider.user'],
     });
 
     return schedules;
