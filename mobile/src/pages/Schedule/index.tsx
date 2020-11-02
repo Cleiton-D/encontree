@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { parseISO, format } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 
@@ -36,6 +36,7 @@ type Schedule = {
       description: string;
     };
     user: {
+      id: string;
       name: string;
       username: string;
       avatar_url: string;
@@ -45,7 +46,9 @@ type Schedule = {
 
 const Schedule = (): JSX.Element => {
   const [schedule, setSchedule] = useState<Schedule>();
+
   const { params } = useRoute<ScheduleCreatedProp>();
+  const navigation = useNavigation();
 
   const [formattedDate, formattedHour] = useMemo(() => {
     if (schedule) {
@@ -57,6 +60,12 @@ const Schedule = (): JSX.Element => {
     }
     return ['', ''];
   }, [schedule]);
+
+  const handleNavigate = useCallback(() => {
+    if (schedule) {
+      navigation.navigate('Chat', { userId: schedule?.provider.user.id });
+    }
+  }, [schedule, navigation]);
 
   useEffect(() => {
     async function loadsSchedule(): Promise<void> {
@@ -100,8 +109,11 @@ const Schedule = (): JSX.Element => {
           </ScheduleDescriptionContainer>
         </ScheduleServiceDetails>
       </ScheduleDetailContainer>
+
       <SendMessageButtonContainer>
-        <Button icon="send">Enviar mensagem</Button>
+        <Button icon="send" onPress={handleNavigate}>
+          Enviar mensagem
+        </Button>
       </SendMessageButtonContainer>
     </Container>
   );

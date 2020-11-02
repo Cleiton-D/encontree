@@ -12,6 +12,7 @@ import EditProfile from '../pages/EditProfile';
 import CreateSchedule from '../pages/CreateSchedule';
 import ScheduleCreated from '../pages/ScheduleCreated';
 import Schedule from '../pages/Schedule';
+import Chat from '../pages/Chat';
 
 const tabs: TabsConfigsType = {
   Home: {
@@ -33,6 +34,7 @@ export type StackParamList = {
   CreateSchedule: { providerId: string };
   ScheduleCreated: { providerId: string; date: string };
   Schedule: { scheduleId: string };
+  Chat: { userId: string };
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -90,6 +92,13 @@ const AppRoutes = (): JSX.Element => (
         headerBackTitleVisible: false,
         headerTitle: 'Agendamento',
         headerTitleStyle: { fontSize: 22 },
+      }}
+    />
+    <Stack.Screen
+      name="Chat"
+      component={Chat}
+      options={{
+        headerShown: false,
       }}
     />
   </Stack.Navigator>
