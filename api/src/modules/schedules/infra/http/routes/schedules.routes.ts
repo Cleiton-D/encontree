@@ -14,6 +14,8 @@ const providerSchedulesController = new ProviderSchedulesController();
 schedulesRouter.use(ensureAuthenticated);
 
 schedulesRouter.post('/', schedulesController.create);
-schedulesRouter.get('/:schedule_id', schedulesController.show);
+schedulesRouter.get('/show/:schedule_id', schedulesController.show);
 schedulesRouter.get('/me', userSchedulesController.index);
 schedulesRouter.get('/me/asprovider', providerSchedulesController.index);
+
+export default schedulesRouter;

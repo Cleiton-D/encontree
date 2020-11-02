@@ -67,7 +67,7 @@ class ListDaysAvailableInMonthService {
         };
       }
       // TODO tem que verificar isso dps
-      date.setHours(workSchedule.fim);
+      date.setHours(workSchedule.end);
 
       const schedulesInDay = schedules.filter(
         item => item.date.getDate() === day,
@@ -77,7 +77,7 @@ class ListDaysAvailableInMonthService {
         day,
         available:
           isAfter(date, new Date()) &&
-          schedulesInDay.length <= workSchedule.fim - workSchedule.inicio,
+          schedulesInDay.length <= workSchedule.end - workSchedule.start,
       };
     });
 

@@ -23,13 +23,16 @@ class ProvidersRepository implements IProvidersRepository {
   }
 
   public async findById(id: string): Promise<Provider | undefined> {
-    const provider = await this.ormRepository.findOne(id);
+    const provider = await this.ormRepository.findOne(id, {
+      relations: ['user'],
+    });
     return provider;
   }
 
   public async findByUserId(userId: string): Promise<Provider | undefined> {
     const provider = await this.ormRepository.findOne({
       where: { user_id: userId },
+      relations: ['user'],
     });
 
     return provider;
@@ -45,6 +48,7 @@ class ProvidersRepository implements IProvidersRepository {
       .select('providers')
       .from(Provider, 'providers')
       .innerJoinAndSelect('providers.user', 'user')
+      .innerJoinAndSelect('providers.category', 'category')
       .where('1 = 1');
 
     if (except_provider_id) {

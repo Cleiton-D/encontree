@@ -8,6 +8,8 @@ export default class UserSchedulesController {
     const user_id = request.user.id;
     const { day, month, year } = request.query;
 
+    console.log(day, month, year);
+
     const listUserSchedules = container.resolve(ListUserSchedulesService);
     const schedules = await listUserSchedules.execute({
       user_id,
