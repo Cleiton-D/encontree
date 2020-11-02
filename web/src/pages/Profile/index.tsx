@@ -92,7 +92,7 @@ const Profile = (): JSX.Element => {
 
           addToast({
             type: 'success',
-            title: 'Foto atualizado',
+            title: 'Foto atualizada',
             description: 'Sua foto de perfil foi alterada com sucesso',
           });
         } catch {

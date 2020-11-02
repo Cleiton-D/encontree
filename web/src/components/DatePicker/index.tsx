@@ -1,22 +1,15 @@
-import React, { useCallback } from 'react';
-import DayPicker, { DayModifiers } from 'react-day-picker';
+import React from 'react';
+import DayPicker, { DayPickerProps } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 import { Container } from './styles';
 
-const DatePicker = (): JSX.Element => {
-  const handleDayClick = useCallback((day: Date, modifiers: DayModifiers) => {
-    console.log(day, modifiers);
-  }, []);
-
+const DatePicker = (props: DayPickerProps): JSX.Element => {
   return (
     <Container>
       <DayPicker
         weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-        disabledDays={[{ daysOfWeek: [0, 6] }]}
-        onDayClick={handleDayClick}
         modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
-        fromMonth={new Date()}
         months={[
           'Janeiro',
           'Fevereiro',
@@ -31,6 +24,7 @@ const DatePicker = (): JSX.Element => {
           'Novembro',
           'Dezembro',
         ]}
+        {...props}
       />
     </Container>
   );

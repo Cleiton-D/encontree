@@ -43,6 +43,37 @@ export const Schedules = styled.ul`
   }
 `;
 
+export const NextScheduleItem = styled.li`
+  width: 58rem;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-bottom: 3.2rem;
+  background: #4285f7;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.75);
+  height: 8rem;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 1rem;
+  color: #fff;
+  cursor: pointer;
+
+  & + & {
+    margin-top: 2.6rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 2.6rem);
+    width: calc(100% + 6rem);
+    height: 0.05rem;
+    background: #ccc;
+    left: -2rem;
+  }
+`;
+
 export const ScheduleItem = styled.li`
   width: 58rem;
   margin-top: 1rem;
@@ -59,24 +90,6 @@ export const ScheduleItem = styled.li`
 
   & + & {
     margin-top: 2.6rem;
-  }
-
-  &:first-child {
-    background: #4285f7;
-    color: #fff;
-    margin-left: 2rem;
-    margin-bottom: 3.2rem;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.75);
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(100% + 2.6rem);
-      width: calc(100% + 6rem);
-      height: 0.05rem;
-      background: #ccc;
-      left: -2rem;
-    }
   }
 `;
 
@@ -122,4 +135,14 @@ export const ScheduleTime = styled.span`
     font-weight: ${theme.font.medium};
     font-size: 1.6rem;
   `}
+`;
+
+export const EmptySchedulesText = styled.strong`
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+
+  margin-top: 40px;
+  font-size: 22px;
+  color: #666;
 `;

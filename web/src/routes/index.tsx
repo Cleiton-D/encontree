@@ -18,7 +18,7 @@ const Routes = (): JSX.Element => (
     <Route path="/dashboard" isPrivate component={Dashboard} />
     <Route path="/profile" isPrivate component={Profile} />
     <Route path="/conversations" isPrivate component={Conversations} />
-    <Route path="/chat/:chatId" isPrivate component={Chat} />
+    <Route path="/chat/:userId" isPrivate component={Chat} />
   </Switch>
 );
 

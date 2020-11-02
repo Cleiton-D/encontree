@@ -36,6 +36,7 @@ export const MessageList = styled.ul`
   display: flex;
   flex: 1;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 type MessageProps = {
