@@ -9,6 +9,8 @@ import { StackParamList } from '../../routes/app.routes';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 
+import api from '../../services/api';
+
 import CreateScheduleHeader from './Header';
 
 import {
@@ -25,7 +27,6 @@ import {
   ChooseHourItemText,
   ReserveButtonWrapper,
 } from './styles';
-import api from '../../services/api';
 
 type CreateScheduleProp = RouteProp<StackParamList, 'CreateSchedule'>;
 

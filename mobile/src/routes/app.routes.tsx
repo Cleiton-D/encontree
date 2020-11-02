@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 
 import EditProfile from '../pages/EditProfile';
 import CreateSchedule from '../pages/CreateSchedule';
+import ScheduleCreated from '../pages/ScheduleCreated';
 
 const tabs: TabsConfigsType = {
   Home: {
@@ -29,6 +30,7 @@ export type StackParamList = {
   Dashboard: undefined;
   EditProfile: undefined;
   CreateSchedule: { providerId: string };
+  ScheduleCreated: { providerId: string; date: string };
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -67,6 +69,13 @@ const AppRoutes = (): JSX.Element => (
     <Stack.Screen
       name="CreateSchedule"
       component={CreateSchedule}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="ScheduleCreated"
+      component={ScheduleCreated}
       options={{
         headerShown: false,
       }}
