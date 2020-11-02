@@ -17,4 +17,5 @@ export default interface ISchedulesRepository {
   ) => Promise<Schedule[]>;
   findInDayByProvider: (data: FindInDayByProviderDTO) => Promise<Schedule[]>;
   findInDayByUser: (data: FindInDayByUserDTO) => Promise<Schedule[]>;
+  findAllByUser: (providerId: string) => Promise<Schedule[]>;
 }

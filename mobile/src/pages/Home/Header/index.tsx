@@ -8,7 +8,6 @@ import {
   Container,
   UserContainer,
   UserName,
-  LogoutButton,
   UserAvatar,
   InputContainer,
   Input,
@@ -19,7 +18,7 @@ type DashboardHeaderProps = {
 };
 
 const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const fistName = useMemo(() => user.name.split(' ')[0], [user.name]);
 
   const handleSearch = useCallback(
@@ -39,9 +38,7 @@ const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
     <Container>
       <UserContainer>
         <UserName>Olá, {fistName}</UserName>
-        <LogoutButton onPress={logout}>
-          <UserAvatar source={{ uri: user.avatar_url || undefined }} />
-        </LogoutButton>
+        <UserAvatar source={{ uri: user.avatar_url || undefined }} />
       </UserContainer>
       <InputContainer>
         <Icon name="search" size={18} color="#999" />

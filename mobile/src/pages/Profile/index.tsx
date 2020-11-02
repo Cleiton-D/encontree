@@ -51,7 +51,7 @@ const Profile = (): JSX.Element => {
 
         <MenuItem
           activeOpacity={0.5}
-          onPress={() => handleNavigate('Dashboard')}
+          onPress={() => handleNavigate('Conversations')}
         >
           <Icon name="message-circle" size={30} color="#444" />
           <MenuItemText>Conversas</MenuItemText>

@@ -47,7 +47,7 @@ const Schedules = (): JSX.Element => {
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const [schedules, setSchedules] = useState([]);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   const navigation = useNavigation();
 

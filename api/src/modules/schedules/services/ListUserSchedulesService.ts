@@ -23,14 +23,16 @@ class ListUserSchedulesService {
     month,
     year,
   }: ListUserSchedulesRequest): Promise<Schedule[]> {
-    const schedules = await this.schedulesRepository.findInDayByUser({
-      user_id,
-      day,
-      month,
-      year,
-    });
+    if (day && month && year) {
+      return this.schedulesRepository.findInDayByUser({
+        user_id,
+        day,
+        month,
+        year,
+      });
+    }
 
-    return schedules;
+    return this.schedulesRepository.findAllByUser(user_id);
   }
 }
 

@@ -103,6 +103,16 @@ class SchedulesRepository implements ISchedulesRepository {
 
     return schedules;
   }
+
+  public async findAllByUser(user_id: string): Promise<Schedule[]> {
+    const schedules = await this.ormRepository.find({
+      where: { user_id },
+      relations: ['provider', 'provider.user'],
+      order: { created_at: 'DESC' },
+    });
+
+    return schedules;
+  }
 }
 
 export default SchedulesRepository;

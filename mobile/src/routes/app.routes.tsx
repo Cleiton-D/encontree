@@ -13,6 +13,7 @@ import CreateSchedule from '../pages/CreateSchedule';
 import ScheduleCreated from '../pages/ScheduleCreated';
 import Schedule from '../pages/Schedule';
 import Chat from '../pages/Chat';
+import Conversations from '../pages/Conversations';
 
 const tabs: TabsConfigsType = {
   Home: {
@@ -31,6 +32,7 @@ const tabs: TabsConfigsType = {
 export type StackParamList = {
   Dashboard: undefined;
   EditProfile: undefined;
+  Conversations: undefined;
   CreateSchedule: { providerId: string };
   ScheduleCreated: { providerId: string; date: string };
   Schedule: { scheduleId: string };
@@ -99,6 +101,16 @@ const AppRoutes = (): JSX.Element => (
       component={Chat}
       options={{
         headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="Conversations"
+      component={Conversations}
+      options={{
+        headerBackImage: () => <Icon name="chevron-left" size={24} />,
+        headerBackTitleVisible: false,
+        headerTitle: 'Conversas',
+        headerTitleStyle: { fontSize: 22 },
       }}
     />
   </Stack.Navigator>
