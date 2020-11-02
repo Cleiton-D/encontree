@@ -18,7 +18,7 @@ usersRouter.get('/:user_id', usersController.show);
 usersRouter.post('/', usersController.create);
 usersRouter.patch(
   '/avatar',
-  ensureAuthenticated,
+  ensureAuthenticated.express,
   multerUpload.single('avatar'),
   userAvatarController.update,
 );

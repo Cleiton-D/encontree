@@ -11,7 +11,7 @@ const schedulesController = new SchedulesController();
 const userSchedulesController = new UserSchedulesController();
 const providerSchedulesController = new ProviderSchedulesController();
 
-schedulesRouter.use(ensureAuthenticated);
+schedulesRouter.use(ensureAuthenticated.express);
 
 schedulesRouter.post('/', schedulesController.create);
 schedulesRouter.get('/show/:schedule_id', schedulesController.show);

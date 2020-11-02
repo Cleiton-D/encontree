@@ -46,7 +46,7 @@ class ListDaysAvailableInMonthService {
       provider_id,
     );
 
-    const lastDayOfMonth = getDaysInMonth(new Date(year, month - 1));
+    const lastDayOfMonth = getDaysInMonth(new Date(year, month));
 
     const daysOfMonth = Array.from(
       { length: lastDayOfMonth },
@@ -56,9 +56,9 @@ class ListDaysAvailableInMonthService {
     const daysOfWeek: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
 
     const daysAvailability = daysOfMonth.map(day => {
-      const date = new Date(year, month - 1, day);
+      const date = new Date(year, month, day);
       const workSchedule = workSchedules.find(
-        item => item.day === daysOfWeek[date.getDate()],
+        item => item.day === daysOfWeek[date.getDay()],
       );
       if (!workSchedule) {
         return {
@@ -69,13 +69,14 @@ class ListDaysAvailableInMonthService {
       date.setHours(workSchedule.end);
 
       const schedulesInDay = schedules.filter(
-        item => item.date.getDate() === day,
+        item => item.date.getDay() === day,
       );
 
       return {
         day,
         available:
           isAfter(date, new Date()) &&
+          !workSchedule.disabled &&
           schedulesInDay.length <= workSchedule.end - workSchedule.start,
       };
     });

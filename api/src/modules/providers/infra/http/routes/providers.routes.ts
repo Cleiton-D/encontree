@@ -14,7 +14,7 @@ const providerConfigurationController = new ProviderConfigurationController();
 const providerDaysAvailableInMonthController = new ProviderDaysAvailabilityInMonthController();
 const providerHoursAvailableInDayController = new ProviderHoursAvailableInDayController();
 
-providersRouter.use(ensureAuthenticated);
+providersRouter.use(ensureAuthenticated.express);
 providersRouter.use('/workschedules', workSchedulesRouter);
 
 providersRouter.get('/show/:provider_id', providerController.show);

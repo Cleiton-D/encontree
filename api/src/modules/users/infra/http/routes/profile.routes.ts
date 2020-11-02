@@ -5,7 +5,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const profileRouter = Router();
 const profileController = new ProfileController();
 
-profileRouter.use(ensureAuthenticated);
+profileRouter.use(ensureAuthenticated.express);
 
 profileRouter.get('/', profileController.show);
 profileRouter.put('/', profileController.update);

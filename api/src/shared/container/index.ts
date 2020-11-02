@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 
 import './providers';
 import '@modules/users/providers';
+import '@modules/chat/providers';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
@@ -17,6 +18,9 @@ import CategoriesRepository from '@modules/providers/infra/typeorm/repositories/
 
 import ISchedulesRepository from '@modules/schedules/repositories/ISchedulesRepository';
 import SchedulesRepository from '@modules/schedules/infra/typeorm/repositories/SchedulesRepositories';
+
+import IMessagesRepository from '@modules/chat/repositories/IMessagesRepository';
+import MessagesRepository from '@modules/chat/infra/typeorm/repositories/MessagesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -41,4 +45,9 @@ container.registerSingleton<ICategoriesRepository>(
 container.registerSingleton<ISchedulesRepository>(
   'SchedulesRepository',
   SchedulesRepository,
+);
+
+container.registerSingleton<IMessagesRepository>(
+  'MessagesRepository',
+  MessagesRepository,
 );

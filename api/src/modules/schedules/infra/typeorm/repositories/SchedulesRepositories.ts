@@ -75,6 +75,7 @@ class SchedulesRepository implements ISchedulesRepository {
             `to_char(${field}, 'DD-MM-YYYY') = '${dayStr}-${monthStr}-${year}'`,
         ),
       },
+      relations: ['user'],
     });
 
     return schedules;

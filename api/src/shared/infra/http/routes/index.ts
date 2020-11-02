@@ -6,6 +6,7 @@ import providersRouter from '@modules/providers/infra/http/routes/providers.rout
 import categoriesRouter from '@modules/providers/infra/http/routes/categories.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import schedulesRouter from '@modules/schedules/infra/http/routes/schedules.routes';
+import messagesRouter from '@modules/chat/infra/http/routes/messages.routes';
 
 const routes = Router();
 
@@ -15,5 +16,6 @@ routes.use('/providers', providersRouter);
 routes.use('/categories', categoriesRouter);
 routes.use('/schedules', schedulesRouter);
 routes.use('/profile', profileRouter);
+routes.use('/messages', messagesRouter);
 
 export default routes;
