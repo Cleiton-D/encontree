@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import MonthPicker, { Event } from 'react-native-month-year-picker';
 import { format, getDaysInMonth } from 'date-fns';
@@ -48,6 +49,8 @@ const Schedules = (): JSX.Element => {
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [schedules, setSchedules] = useState([]);
 
+  const navigation = useNavigation();
+
   const handleMonthPicker = useCallback(() => {
     setShowMonthPicker(true);
   }, []);
@@ -63,6 +66,13 @@ const Schedules = (): JSX.Element => {
   const handleSelectDay = useCallback((day: number) => {
     setSelectedDay(day);
   }, []);
+
+  const handleNavigate = useCallback(
+    (scheduleId: string) => {
+      navigation.navigate('Schedule', { scheduleId });
+    },
+    [navigation],
+  );
 
   const formatedDate = useMemo(
     () => format(date, "MMMM', 'yyyy", { locale: ptBr }),
@@ -132,14 +142,17 @@ const Schedules = (): JSX.Element => {
             data={schedules}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <ScheduleContainer activeOpacity={0.7}>
+              <ScheduleContainer
+                activeOpacity={0.7}
+                onPress={() => handleNavigate(item.id)}
+              >
                 <ProviderImage
                   source={{ uri: item.provider.user.avatar_url || undefined }}
                 />
                 <ProviderInfo>
                   <ProviderName>{item.provider.user.name}</ProviderName>
                   <ScheduleTimeContainer>
-                    <Icon name="clock" />
+                    <Icon name="clock" color="#666" size={14} />
                     <ScheduleTimeText>13:00 - 14:00</ScheduleTimeText>
                   </ScheduleTimeContainer>
                 </ProviderInfo>

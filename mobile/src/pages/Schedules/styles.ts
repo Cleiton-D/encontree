@@ -41,7 +41,7 @@ export const MonthPickerContainer = styled.View`
 
 export const DaysList = styled(FlatList as new () => FlatList<DayOfMonth>)`
   margin-top: 20px;
-  height: 43px;
+  max-height: 60px;
 `;
 
 type DayProps = {
@@ -79,18 +79,59 @@ export const DayDescriptionText = styled.Text`
   color: #fff;
 `;
 
-export const ResultContainer = styled.View``;
+export const ResultContainer = styled.View`
+  flex: 1;
+  padding-bottom: 80px;
+`;
 
-export const ScheduleList = styled(FlatList as new () => FlatList<Schedule>)``;
+export const ScheduleList = styled(FlatList as new () => FlatList<Schedule>)`
+  padding: 5px;
+  padding-top: 20px;
+`;
 
-export const ScheduleContainer = styled.TouchableOpacity``;
+export const ScheduleContainer = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-bottom: 20px;
 
-export const ProviderImage = styled.Image``;
+  background: #fff;
+  height: 100px;
+  border-radius: 5px;
+  padding: 8px;
 
-export const ProviderInfo = styled.View``;
+  shadow-color: #c2d5ff;
+  shadow-offset: 0px 0px;
+  shadow-opacity: 1;
+  shadow-radius: 2px;
+  elevation: 1;
+`;
 
-export const ProviderName = styled.Text``;
+export const ProviderImage = styled.Image`
+  height: 100%;
+  background: #f1f1f1;
+  width: 70px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-color: #dbe6ff;
+  margin-right: 15px;
+`;
 
-export const ScheduleTimeContainer = styled.View``;
+export const ProviderInfo = styled.View`
+  padding: 10px 0;
+`;
 
-export const ScheduleTimeText = styled.Text``;
+export const ProviderName = styled.Text`
+  font-size: 16px;
+  color: #333;
+`;
+
+export const ScheduleTimeContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: 8px;
+`;
+
+export const ScheduleTimeText = styled.Text`
+  margin-left: 5px;
+  color: #666;
+`;
