@@ -5,12 +5,7 @@ import { Provider } from '.';
 
 export const Container = styled.View`
   flex: 1;
-  margin-top: 25px;
-  padding: 0 24px;
-`;
-
-export const PageTitle = styled.Text`
-  font-size: 22px;
+  padding: 0 15px;
 `;
 
 export const ResultList = styled(FlatList as new () => FlatList<Provider>)`
@@ -27,6 +22,7 @@ export const ProviderContainer = styled.TouchableOpacity`
   height: 100px;
   border-radius: 5px;
   padding: 8px;
+  margin-bottom: 25px;
 
   shadow-color: #c2d5ff;
   shadow-offset: 0px 0px;

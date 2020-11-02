@@ -1,7 +1,9 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useRef, useEffect } from 'react';
+import { TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { debounce } from 'lodash';
 
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../../hooks/auth';
 
 import {
@@ -20,6 +22,24 @@ type DashboardHeaderProps = {
 const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
   const { user } = useAuth();
   const fistName = useMemo(() => user.name.split(' ')[0], [user.name]);
+
+  const inputRef = useRef<TextInput>(null);
+
+  const inputValueRef = useRef<{ value: string | undefined }>({
+    value: undefined,
+  });
+
+  const navigation = useNavigation();
+
+  const handleFocus = useCallback(() => {
+    inputRef.current?.clear();
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('focus', handleFocus);
+
+    return () => navigation.removeListener('focus', handleFocus);
+  }, [navigation, handleFocus]);
 
   const handleSearch = useCallback(
     (value: string) => {
@@ -43,11 +63,16 @@ const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
       <InputContainer>
         <Icon name="search" size={18} color="#999" />
         <Input
+          ref={inputRef}
           autoCapitalize="words"
           placeholder="Procurar..."
           returnKeyType="search"
           placeholderTextColor="#aaa"
-          onChangeText={handleSearchDelayed}
+          onChangeText={value => {
+            inputValueRef.current.value = value;
+            handleSearchDelayed(value);
+          }}
+          // value={inputValueRef.current.value}
         />
       </InputContainer>
     </Container>

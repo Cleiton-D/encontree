@@ -36,7 +36,11 @@ export type Category = {
   image_url: string;
 };
 
-const Default = (): JSX.Element => {
+type CategoryProps = {
+  onSelectCategory: (categoryId: string) => void;
+};
+
+const Default = ({ onSelectCategory }: CategoryProps): JSX.Element => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -102,7 +106,10 @@ const Default = (): JSX.Element => {
           data={categories}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <CategoryContainer activeOpacity={0.55}>
+            <CategoryContainer
+              activeOpacity={0.55}
+              onPress={() => onSelectCategory(item.id)}
+            >
               <CategoryImageContainer>
                 <CategoryImage source={{ uri: item.image_url || undefined }} />
               </CategoryImageContainer>

@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import MonthPicker, { Event } from 'react-native-month-year-picker';
-import { format, getDaysInMonth } from 'date-fns';
+import { format, getDaysInMonth, parseISO } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 
 import {
@@ -40,7 +40,8 @@ export type Schedule = {
       avatar_url: string;
     };
   };
-  date: Date;
+  date: string;
+  formattedTime: string;
 };
 
 const Schedules = (): JSX.Element => {
@@ -96,11 +97,28 @@ const Schedules = (): JSX.Element => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
 
-        const response = await api.get('schedules/me', {
+        const response = await api.get<Schedule[]>('schedules/me', {
           params: { year, month, day: selectedDay },
         });
 
-        setSchedules(response.data);
+        const loadedSchedules = response.data.map(schedule => {
+          const parsedDate = parseISO(schedule.date);
+          const endDate = new Date(
+            parsedDate.getFullYear(),
+            parsedDate.getMonth(),
+            parsedDate.getDate(),
+            parsedDate.getHours() + 1,
+          );
+
+          const formattedTime = `${format(parsedDate, 'HH:mm')} - ${format(
+            endDate,
+            'HH:mm',
+          )}`;
+
+          return { ...schedule, formattedTime };
+        });
+
+        setSchedules(loadedSchedules);
       }
     }
     loadSchedules();
@@ -153,7 +171,7 @@ const Schedules = (): JSX.Element => {
                   <ProviderName>{item.provider.user.name}</ProviderName>
                   <ScheduleTimeContainer>
                     <Icon name="clock" color="#666" size={14} />
-                    <ScheduleTimeText>13:00 - 14:00</ScheduleTimeText>
+                    <ScheduleTimeText>{item.formattedTime}</ScheduleTimeText>
                   </ScheduleTimeContainer>
                 </ProviderInfo>
               </ScheduleContainer>

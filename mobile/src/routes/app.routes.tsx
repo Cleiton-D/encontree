@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import Schedules from '../pages/Schedules';
 import Profile from '../pages/Profile';
 
+import Search from '../pages/Search';
 import EditProfile from '../pages/EditProfile';
 import CreateSchedule from '../pages/CreateSchedule';
 import ScheduleCreated from '../pages/ScheduleCreated';
@@ -37,6 +38,7 @@ export type StackParamList = {
   ScheduleCreated: { providerId: string; date: string };
   Schedule: { scheduleId: string };
   Chat: { userId: string };
+  Search: { search?: string; category?: string };
 };
 
 const Stack = createStackNavigator<StackParamList>();
@@ -73,6 +75,26 @@ const AppRoutes = (): JSX.Element => (
       }}
     />
     <Stack.Screen
+      name="Schedule"
+      component={Schedule}
+      options={{
+        headerBackImage: () => <Icon name="chevron-left" size={24} />,
+        headerBackTitleVisible: false,
+        headerTitle: 'Agendamento',
+        headerTitleStyle: { fontSize: 22 },
+      }}
+    />
+    <Stack.Screen
+      name="Conversations"
+      component={Conversations}
+      options={{
+        headerBackImage: () => <Icon name="chevron-left" size={24} />,
+        headerBackTitleVisible: false,
+        headerTitle: 'Conversas',
+        headerTitleStyle: { fontSize: 22 },
+      }}
+    />
+    <Stack.Screen
       name="CreateSchedule"
       component={CreateSchedule}
       options={{
@@ -86,16 +108,7 @@ const AppRoutes = (): JSX.Element => (
         headerShown: false,
       }}
     />
-    <Stack.Screen
-      name="Schedule"
-      component={Schedule}
-      options={{
-        headerBackImage: () => <Icon name="chevron-left" size={24} />,
-        headerBackTitleVisible: false,
-        headerTitle: 'Agendamento',
-        headerTitleStyle: { fontSize: 22 },
-      }}
-    />
+
     <Stack.Screen
       name="Chat"
       component={Chat}
@@ -103,14 +116,12 @@ const AppRoutes = (): JSX.Element => (
         headerShown: false,
       }}
     />
+
     <Stack.Screen
-      name="Conversations"
-      component={Conversations}
+      name="Search"
+      component={Search}
       options={{
-        headerBackImage: () => <Icon name="chevron-left" size={24} />,
-        headerBackTitleVisible: false,
-        headerTitle: 'Conversas',
-        headerTitleStyle: { fontSize: 22 },
+        headerShown: false,
       }}
     />
   </Stack.Navigator>
