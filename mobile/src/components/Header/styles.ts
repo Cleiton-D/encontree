@@ -5,6 +5,7 @@ export const Container = styled.View`
   background: #fff;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
+  z-index: 3;
 
   shadow-color: #000;
   shadow-offset: 0px 4px;

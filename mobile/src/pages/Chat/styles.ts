@@ -11,7 +11,9 @@ export const Container = styled.View`
 `;
 
 export const MessagesList = styled(FlatList as new () => FlatList<Message>)`
-  padding: 0 15px;
+  padding: 5px 15px;
+  top: 0;
+  margin-bottom: ${20 + getBottomSpace()}px;
 `;
 
 type MessageItemProps = {
@@ -19,7 +21,7 @@ type MessageItemProps = {
 };
 export const MessageItem = styled.View<MessageItemProps>`
   ${({ itsMe }) => css`
-    margin-top: 15px;
+    margin-bottom: 15px;
     margin-left: 15px;
     padding: 10px;
     position: relative;

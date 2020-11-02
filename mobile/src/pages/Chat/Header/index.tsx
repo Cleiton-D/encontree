@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SafeAreaView, TouchableOpacity } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -54,9 +54,9 @@ const Header = ({ userId }: HeaderProps): JSX.Element => {
           <ProviderNickname>@{user?.username}</ProviderNickname>
         </ProviderContainer>
 
-        <TouchableOpacity>
+        <View style={{ opacity: 0, backfaceVisibility: 'hidden' }}>
           <Icon name="info" size={24} />
-        </TouchableOpacity>
+        </View>
       </Container>
     </SafeAreaView>
   );
