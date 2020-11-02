@@ -6,11 +6,13 @@ import workSchedulesRouter from './workSchedules.routes';
 import ProviderConfigurationController from '../controllers/ProviderConfigurationController';
 import ProviderController from '../controllers/ProviderController';
 import ProviderDaysAvailabilityInMonthController from '../controllers/ProviderDaysAvailableInMonthController';
+import ProviderHoursAvailableInDayController from '../controllers/ProviderHoursAvailableInDayController';
 
 const providersRouter = Router();
 const providerController = new ProviderController();
 const providerConfigurationController = new ProviderConfigurationController();
 const providerDaysAvailableInMonthController = new ProviderDaysAvailabilityInMonthController();
+const providerHoursAvailableInDayController = new ProviderHoursAvailableInDayController();
 
 providersRouter.use(ensureAuthenticated);
 providersRouter.use('/workschedules', workSchedulesRouter);
@@ -22,8 +24,13 @@ providersRouter.get('/', providerController.index);
 providersRouter.post('/', providerConfigurationController.create);
 
 providersRouter.get(
-  '/:provider_id/days-available',
+  '/show/:provider_id/days-available',
   providerDaysAvailableInMonthController.index,
+);
+
+providersRouter.get(
+  '/show/:provider_id/hours-available',
+  providerHoursAvailableInDayController.index,
 );
 
 export default providersRouter;

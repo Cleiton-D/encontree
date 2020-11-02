@@ -66,7 +66,6 @@ class ListDaysAvailableInMonthService {
           available: false,
         };
       }
-      // TODO tem que verificar isso dps
       date.setHours(workSchedule.end);
 
       const schedulesInDay = schedules.filter(

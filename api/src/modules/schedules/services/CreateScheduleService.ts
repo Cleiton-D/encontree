@@ -4,14 +4,14 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IProvidersRepository from '@modules/providers/repositories/IProvidersRepository';
 import AppError from '@shared/errors/AppError';
 import IWorkSchedulesRepository from '@modules/providers/repositories/IWorkSchedulesRepository';
-import { isBefore, startOfHour } from 'date-fns';
+import { isBefore, startOfHour, parseISO } from 'date-fns';
 import ISchedulesRepository from '../repositories/ISchedulesRepository';
 import Schedule from '../infra/typeorm/entities/Schedule';
 
 type CreateScheduleRequest = {
   provider_id: string;
   user_id: string;
-  date: Date;
+  date: string;
 };
 
 type Day = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
@@ -24,8 +24,8 @@ class CreateScheduleService {
     @inject('UsersRepository') private usersRepository: IUsersRepository,
     @inject('ProvidersRepository')
     private providersRepository: IProvidersRepository,
-    @inject('WorkScheduleRepository')
-    private workScheduleRepository: IWorkSchedulesRepository,
+    @inject('WorkSchedulesRepository')
+    private workSchedulesRepository: IWorkSchedulesRepository,
   ) {}
 
   public async execute({
@@ -38,7 +38,8 @@ class CreateScheduleService {
       throw new AppError('User not found');
     }
 
-    const dateWithoutMinutes = startOfHour(date);
+    const parsedDate = parseISO(date);
+    const dateWithoutMinutes = startOfHour(parsedDate);
 
     if (isBefore(dateWithoutMinutes, Date.now())) {
       throw new AppError(
@@ -56,9 +57,9 @@ class CreateScheduleService {
     }
 
     const days: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
-    const dayStr = days[date.getDay()];
+    const dayStr = days[parsedDate.getDay()];
 
-    const workSchedule = await this.workScheduleRepository.findByProviderAndDay(
+    const workSchedule = await this.workSchedulesRepository.findByProviderAndDay(
       { providerId: provider_id, day: dayStr },
     );
 
@@ -67,7 +68,6 @@ class CreateScheduleService {
         'You cannot create a schedule on this day and provider',
       );
     }
-    // TODO criar validação para horarios quando eu entender como serão salvos
 
     const existSchedule = await this.schedulesRepository.findByDate(
       dateWithoutMinutes,
