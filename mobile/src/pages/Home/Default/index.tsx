@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import api from '../../../services/api';
 
@@ -39,6 +40,15 @@ const Default = (): JSX.Element => {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
+  const navigation = useNavigation();
+
+  const handleNavigate = useCallback(
+    (providerId: string) => {
+      navigation.navigate('CreateSchedule', { providerId });
+    },
+    [navigation],
+  );
+
   useEffect(() => {
     async function loadProviders(): Promise<void> {
       const response = await api.get('providers');
@@ -63,7 +73,10 @@ const Default = (): JSX.Element => {
         data={providers}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <ProviderContainer activeOpacity={0.55}>
+          <ProviderContainer
+            activeOpacity={0.55}
+            onPress={() => handleNavigate(item.id)}
+          >
             <ProviderImageContainer>
               <ProviderImage
                 source={{ uri: item.user.avatar_url || undefined }}

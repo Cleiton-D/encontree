@@ -11,6 +11,7 @@ import { FormHandles } from '@unform/core';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 import * as Yup from 'yup';
 
+import { useNavigation } from '@react-navigation/native';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -42,6 +43,7 @@ const EditProfile = (): JSX.Element => {
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
   const { user, updateUser } = useAuth();
+  const navigation = useNavigation();
 
   const handleEditProfile = useCallback(
     async (data: ProfileFormData) => {
@@ -88,6 +90,8 @@ const EditProfile = (): JSX.Element => {
           'Cadastro atualizado',
           'Seus dados foram atualizados com com sucesso',
         );
+
+        navigation.goBack();
       } catch {
         Alert.alert(
           'Erro ao atualizar cadastro',
@@ -95,7 +99,7 @@ const EditProfile = (): JSX.Element => {
         );
       }
     },
-    [updateUser],
+    [updateUser, navigation],
   );
 
   const handleCaptureImage = useCallback(() => {

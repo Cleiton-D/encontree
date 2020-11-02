@@ -9,6 +9,7 @@ import Schedules from '../pages/Schedules';
 import Profile from '../pages/Profile';
 
 import EditProfile from '../pages/EditProfile';
+import CreateSchedule from '../pages/CreateSchedule';
 
 const tabs: TabsConfigsType = {
   Home: {
@@ -24,7 +25,13 @@ const tabs: TabsConfigsType = {
   },
 };
 
-const Stack = createStackNavigator();
+export type StackParamList = {
+  Dashboard: undefined;
+  EditProfile: undefined;
+  CreateSchedule: { providerId: string };
+};
+
+const Stack = createStackNavigator<StackParamList>();
 const Bottom = createBottomTabNavigator();
 
 const BottomTabRoutes = (): JSX.Element => (
@@ -55,6 +62,13 @@ const AppRoutes = (): JSX.Element => (
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
         headerTitleStyle: { display: 'none' },
+      }}
+    />
+    <Stack.Screen
+      name="CreateSchedule"
+      component={CreateSchedule}
+      options={{
+        headerShown: false,
       }}
     />
   </Stack.Navigator>

@@ -45,7 +45,7 @@ const Profile = (): JSX.Element => {
           onPress={() => handleNavigate('EditProfile')}
         >
           <Icon name="user" size={30} color="#444" />
-          <MenuItemText>Meu Perfil</MenuItemText>
+          <MenuItemText>Editar Perfil</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
 
