@@ -173,6 +173,7 @@ const CreateSchedule = (): JSX.Element => {
                 <ChooseHourSelectContainer>
                   {morningHours.map(item => (
                     <ChooseHourItem
+                      key={item.hour}
                       available={item.available}
                       selected={selectedHour === item.hour}
                       onPress={() => handleSelectHour(item.hour)}
@@ -189,6 +190,7 @@ const CreateSchedule = (): JSX.Element => {
                 <ChooseHourSelectContainer>
                   {afternoonHours.map(item => (
                     <ChooseHourItem
+                      key={item.hour}
                       available={item.available}
                       selected={selectedHour === item.hour}
                       onPress={() => handleSelectHour(item.hour)}

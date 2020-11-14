@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { StackParamList } from '../../routes/app.routes';
 
@@ -40,6 +40,7 @@ type SearchProps = {
 };
 
 const Search = (): JSX.Element => {
+  const navigation = useNavigation();
   const { params: routeParams } = useRoute<ScheduleCreatedProp>();
 
   const [data, setData] = useState<Provider[]>([]);
@@ -48,6 +49,13 @@ const Search = (): JSX.Element => {
   const handleSearch = useCallback((value: string) => {
     setSearch(value);
   }, []);
+
+  const handleNavigate = useCallback(
+    (providerId: string) => {
+      navigation.navigate('CreateSchedule', { providerId });
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     async function loadData(): Promise<void> {
@@ -79,7 +87,10 @@ const Search = (): JSX.Element => {
             data={data}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <ProviderContainer activeOpacity={0.7}>
+              <ProviderContainer
+                activeOpacity={0.7}
+                onPress={() => handleNavigate(item.id)}
+              >
                 <ProviderImage
                   source={{ uri: item.user.avatar_url || undefined }}
                 />

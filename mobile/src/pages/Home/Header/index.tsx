@@ -2,8 +2,8 @@ import React, { useMemo, useCallback, useRef, useEffect } from 'react';
 import { TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { debounce } from 'lodash';
-
 import { useNavigation } from '@react-navigation/native';
+
 import { useAuth } from '../../../hooks/auth';
 
 import {

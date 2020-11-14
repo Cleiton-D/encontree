@@ -4,13 +4,15 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-import { User } from '.';
+import { Conversation } from '.';
 
 export const Container = styled.View`
   flex: 1;
 `;
 
-export const ConversationList = styled(FlatList as new () => FlatList<User>)`
+export const ConversationList = styled(
+  FlatList as new () => FlatList<Conversation>,
+)`
   margin-top: 40px;
   padding: 10px 20px;
   bottom: ${getBottomSpace()}px;

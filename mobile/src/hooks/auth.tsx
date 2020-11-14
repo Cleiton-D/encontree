@@ -45,6 +45,11 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
 
+  const logout = useCallback(async () => {
+    await AsyncStorage.multiRemove(['@Encontree:token', '@Encontree:user']);
+    setData({} as AuthState);
+  }, []);
+
   useEffect(() => {
     async function loadData(): Promise<void> {
       const [token, user] = await AsyncStorage.multiGet([
@@ -54,13 +59,15 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 
       if (token[1] && user[1]) {
         api.defaults.headers.Authorization = `Bearer ${token[1]}`;
+        await api.get('sessions/validate').catch(logout);
+
         setData({ token: token[1], user: JSON.parse(user[1]) });
       }
 
       setLoading(false);
     }
     loadData();
-  }, []);
+  }, [logout]);
 
   const login = useCallback(async ({ email, password }: LoginCredentials) => {
     const response = await api.post('sessions', { email, password });
@@ -73,11 +80,6 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     setData({ token, user });
-  }, []);
-
-  const logout = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@Encontree:token', '@Encontree:user']);
-    setData({} as AuthState);
   }, []);
 
   const updateUser = useCallback(async (user: User) => {

@@ -12,22 +12,17 @@ import {
   EndContainerIcon,
 } from './styles';
 
-export type User = {
+export type Conversation = {
   id: string;
-  name: string;
-  avatar_url: string;
-};
-
-type Schedule = {
-  id: string;
-  provider: {
-    user: User;
+  user: {
+    id: string;
+    name: string;
+    avatar_url: string;
   };
-  date: Date;
 };
 
 const Conversations = (): JSX.Element => {
-  const [conversations, setConversations] = useState<User[]>([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
 
   const navigation = useNavigation();
 
@@ -39,26 +34,12 @@ const Conversations = (): JSX.Element => {
   );
 
   useEffect(() => {
-    async function loadSchedules(): Promise<void> {
-      const response = await api.get<Schedule[]>('schedules/me');
+    async function loadConversations(): Promise<void> {
+      const response = await api.get('conversations');
 
-      const filteredUsers = response.data.reduce<User[]>(
-        (accumulator, schedule) => {
-          const itemExists = accumulator.find(
-            user => user.id === schedule.provider.user.id,
-          );
-          if (!itemExists) {
-            accumulator.push(schedule.provider.user);
-          }
-
-          return accumulator;
-        },
-        [],
-      );
-
-      setConversations(filteredUsers);
+      setConversations(response.data);
     }
-    loadSchedules();
+    loadConversations();
   }, []);
 
   return (
@@ -67,9 +48,11 @@ const Conversations = (): JSX.Element => {
         data={conversations}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <ConversationItem onPress={() => handleNavigate(item.id)}>
-            <ProviderImage source={{ uri: item.avatar_url || undefined }} />
-            <ProviderName>{item.name}</ProviderName>
+          <ConversationItem onPress={() => handleNavigate(item.user.id)}>
+            <ProviderImage
+              source={{ uri: item.user.avatar_url || undefined }}
+            />
+            <ProviderName>{item.user.name}</ProviderName>
             <EndContainerIcon name="chevron-right" size={24} color="#aaa" />
           </ConversationItem>
         )}
