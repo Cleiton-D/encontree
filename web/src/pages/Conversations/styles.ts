@@ -19,6 +19,7 @@ export const Content = styled.div`
   border-radius: 4rem;
   box-shadow: 0px 0px 4px #cddcff;
   padding: 4rem;
+  margin-left: 25rem;
 `;
 
 export const ChatList = styled.ul`
@@ -91,4 +92,14 @@ export const ArrowLeft = styled(FiChevronRight)`
   right: 2rem;
   font-size: 2.4rem;
   color: #333;
+`;
+
+export const EmptyConversationsText = styled.strong`
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+
+  margin-top: 40px;
+  font-size: 22px;
+  color: #666;
 `;

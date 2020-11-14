@@ -51,6 +51,9 @@ export default createGlobalStyle`
       'main'
     ;
     grid-template-rows: 10rem 1fr;
+
+    margin: 0 auto;
+    height: 100vh;
   }
 
   ${({ theme }) => css`

@@ -1,8 +1,22 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.main`
-  grid-area: 'main';
-  padding: 1.5rem;
+import { PageContentWrapperProps } from '.';
+
+type ContainerProps = Pick<PageContentWrapperProps, 'full'>;
+
+export const Container = styled.main<ContainerProps>`
+  ${({ full }) => css`
+    height: 100%;
+    padding: 1.5rem;
+
+    ${full
+      ? css`
+          grid-row: header / main;
+        `
+      : css`
+          grid-area: main;
+        `}
+  `}
 `;
 
 export const Content = styled.div`

@@ -8,6 +8,7 @@ import {
 
 import Header from '../components/Header';
 import PageContentWrapper from '../components/PageContentWrapper';
+// import MainContainer from '../components/MainContainer';
 
 import { useAuth } from '../hooks/auth';
 
@@ -32,9 +33,11 @@ const Route = ({ isPrivate = false, ...rest }: RouteProps): JSX.Element => {
     }
 
     return (
-      <PageContentWrapper>
-        <ReactRouter {...rest} />
-      </PageContentWrapper>
+      <>
+        <PageContentWrapper full>
+          <ReactRouter {...rest} />
+        </PageContentWrapper>
+      </>
     );
   }
 

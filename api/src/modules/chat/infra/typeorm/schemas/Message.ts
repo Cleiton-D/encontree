@@ -4,13 +4,15 @@ import {
   Entity,
   ObjectID,
   ObjectIdColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('messages')
 class Message {
   @ObjectIdColumn()
   id: ObjectID;
+
+  @Column()
+  conversation_id: ObjectID;
 
   @Column()
   content: string;
@@ -23,9 +25,6 @@ class Message {
 
   @CreateDateColumn()
   created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
 
 export default Message;

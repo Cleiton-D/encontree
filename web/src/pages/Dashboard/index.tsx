@@ -120,11 +120,7 @@ const Dashboard = (): JSX.Element => {
           )}
         </SchedulesContainer>
 
-        <DatePicker
-          disabledDays={[{ daysOfWeek: [0, 6] }]}
-          selectedDays={selectedDate}
-          onDayClick={handleSelectDate}
-        />
+        <DatePicker selectedDays={selectedDate} onDayClick={handleSelectDate} />
       </Content>
     </Container>
   );

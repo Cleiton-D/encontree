@@ -2,15 +2,17 @@ import React from 'react';
 
 import { Container, Content } from './styles';
 
-type PageContentWrapperProps = {
+export type PageContentWrapperProps = {
   children: React.ReactNode;
+  full?: boolean;
 };
 
 const PageContentWrapper = ({
+  full = false,
   children,
 }: PageContentWrapperProps): JSX.Element => {
   return (
-    <Container>
+    <Container full={full}>
       <Content>{children}</Content>
     </Container>
   );

@@ -4,6 +4,7 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 import IMessagesRepository from '../repositories/IMessagesRepository';
 import Message from '../infra/typeorm/schemas/Message';
+import IConversationsRepository from '../repositories/IConversationsRepository';
 
 type ListAllMessagesBetweenUsersRequest = {
   recipient_id: string;
@@ -14,6 +15,8 @@ type ListAllMessagesBetweenUsersRequest = {
 class ListAllMessagesBetweenUsersService {
   constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository,
+    @inject('ConversationsRepository')
+    private conversationsRepository: IConversationsRepository,
     @inject('MessagesRepository')
     private messagesRepository: IMessagesRepository,
   ) {}
@@ -35,10 +38,17 @@ class ListAllMessagesBetweenUsersService {
       throw new AppError('Sender not found');
     }
 
-    const messages = await this.messagesRepository.listBetweenUsers({
-      recipient_id,
-      sender_id,
+    const conversation = await this.conversationsRepository.findByUsers({
+      users_ids: [recipient_id, sender_id],
     });
+
+    if (!conversation) {
+      return [];
+    }
+
+    const messages = await this.messagesRepository.listAllByConversation(
+      conversation,
+    );
 
     return messages;
   }

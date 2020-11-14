@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 export const Container = styled.header`
-  grid-area: 'header';
+  grid-area: header;
 `;
 
 export const Content = styled.div`
@@ -28,7 +28,7 @@ export const Navigation = styled.nav`
   align-items: center;
 `;
 
-export const Notifications = styled.button`
+export const Notifications = styled(Link)`
   background: none;
   border: 0;
   margin-right: 7rem;
@@ -81,4 +81,20 @@ export const UserAvatar = styled.div<UserAvatarProps>`
     border-radius: 50%;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
   `}
+`;
+
+export const LogoutButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: none;
+  border: 0;
+  outline: 0;
+  margin-left: 20px;
+  cursor: pointer;
+
+  > span {
+    margin-left: 10px;
+    font-size: 1.6rem;
+    color: #666;
+  }
 `;

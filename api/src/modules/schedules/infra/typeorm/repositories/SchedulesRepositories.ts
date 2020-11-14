@@ -5,6 +5,7 @@ import CreateScheduleDTO from '@modules/schedules/dtos/CreateScheduleDTO';
 import FindInMonthByProviderDTO from '@modules/schedules/dtos/FindInMonthByProviderDTO';
 import FindInDayByProviderDTO from '@modules/schedules/dtos/FindInDayByProviderDTO';
 import FindInDayByUserDTO from '@modules/schedules/dtos/FindInDayByUserDTO';
+import FindLastDTO from '@modules/schedules/dtos/FindLastDTO';
 import Schedule from '../entities/Schedule';
 
 class SchedulesRepository implements ISchedulesRepository {
@@ -112,6 +113,18 @@ class SchedulesRepository implements ISchedulesRepository {
     });
 
     return schedules;
+  }
+
+  public async findLast({
+    provider_id,
+    user_id,
+  }: FindLastDTO): Promise<Schedule | undefined> {
+    const schedule = await this.ormRepository.findOne({
+      where: { provider_id, user_id },
+      order: { date: 'DESC' },
+      relations: ['provider', 'provider.category'],
+    });
+    return schedule;
   }
 }
 

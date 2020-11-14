@@ -21,6 +21,8 @@ import SchedulesRepository from '@modules/schedules/infra/typeorm/repositories/S
 
 import IMessagesRepository from '@modules/chat/repositories/IMessagesRepository';
 import MessagesRepository from '@modules/chat/infra/typeorm/repositories/MessagesRepository';
+import IConversationsRepository from '@modules/chat/repositories/IConversationsRepository';
+import ConversationsRepository from '@modules/chat/infra/typeorm/repositories/ConversationsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -50,4 +52,9 @@ container.registerSingleton<ISchedulesRepository>(
 container.registerSingleton<IMessagesRepository>(
   'MessagesRepository',
   MessagesRepository,
+);
+
+container.registerSingleton<IConversationsRepository>(
+  'ConversationsRepository',
+  ConversationsRepository,
 );

@@ -29,6 +29,12 @@ import {
   ScheduleDate,
 } from './styles';
 
+type Schedule = {
+  date: string;
+  hourFormatted: string;
+  dateFormatted: string;
+};
+
 type User = {
   id: string;
   name: string;
@@ -41,12 +47,13 @@ type Message = {
   content: string;
   sender_id: string;
   created_at: string;
-
   formatedTime: string;
   me: boolean;
 };
 
 const Chat = (): JSX.Element => {
+  const [lastSchedule, setLastSchedule] = useState<Schedule>();
+
   const [messages, setMessages] = useState<Message[]>([]);
   const messagesEndRef = useRef<HTMLLIElement>(null);
 
@@ -107,6 +114,22 @@ const Chat = (): JSX.Element => {
 
     [authUser.id],
   );
+
+  useEffect(() => {
+    async function loadLastSchedule(): Promise<void> {
+      const response = await api.get<Schedule>('/schedules/me/last', {
+        params: { user: userId },
+      });
+
+      const schedule = response.data;
+      const date = parseISO(response.data.date);
+      const dateFormatted = format(date, 'dd/MM/yyyy');
+      const hourFormatted = format(date, 'HH:mm');
+
+      setLastSchedule({ ...schedule, dateFormatted, hourFormatted });
+    }
+    loadLastSchedule();
+  }, [userId]);
 
   useEffect(() => {
     async function loadOldMessages(): Promise<void> {
@@ -179,15 +202,15 @@ const Chat = (): JSX.Element => {
           <UserInfo>
             <Username>{user?.name}</Username>
             <Usernick>{user?.username}</Usernick>
-            <ServiceDescription>Limpeza de quintal</ServiceDescription>
+            <ServiceDescription>Último agendamento</ServiceDescription>
             <Separator />
             <ScheduleDate>
               <strong>Data:</strong>
-              <span>23/11/2020</span>
+              <span>{lastSchedule?.dateFormatted}</span>
             </ScheduleDate>
             <ScheduleDate>
               <strong>Horário:</strong>
-              <span>13:00</span>
+              <span>{lastSchedule?.hourFormatted}</span>
             </ScheduleDate>
           </UserInfo>
         </UserInfoContent>

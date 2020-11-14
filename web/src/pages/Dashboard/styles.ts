@@ -13,8 +13,8 @@ export const PageTitle = styled.h1`
 `;
 
 export const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
   height: 100%;
 `;
 
@@ -25,6 +25,7 @@ export const SchedulesContainer = styled.section`
   border-radius: 4rem;
   box-shadow: 0px 0px 4px #cddcff;
   padding: 4rem;
+  margin-right: 25rem;
 `;
 
 export const Schedules = styled.ul`

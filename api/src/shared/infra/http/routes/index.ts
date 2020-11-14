@@ -7,6 +7,7 @@ import categoriesRouter from '@modules/providers/infra/http/routes/categories.ro
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import schedulesRouter from '@modules/schedules/infra/http/routes/schedules.routes';
 import messagesRouter from '@modules/chat/infra/http/routes/messages.routes';
+import conversationsRouter from '@modules/chat/infra/http/routes/conversations.routes';
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use('/categories', categoriesRouter);
 routes.use('/schedules', schedulesRouter);
 routes.use('/profile', profileRouter);
 routes.use('/messages', messagesRouter);
+routes.use('/conversations', conversationsRouter);
 
 export default routes;

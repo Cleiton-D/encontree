@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 
 import api from '../services/api';
 
@@ -99,6 +105,10 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 
     setData(oldData => ({ ...oldData, provider }));
   }, []);
+
+  useEffect(() => {
+    api.get('sessions/validate').catch(logout);
+  }, [logout]);
 
   return (
     <AuthContext.Provider

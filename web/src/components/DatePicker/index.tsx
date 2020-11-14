@@ -9,7 +9,7 @@ const DatePicker = (props: DayPickerProps): JSX.Element => {
     <Container>
       <DayPicker
         weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-        modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
+        modifiers={{ available: { daysOfWeek: [0, 1, 2, 3, 4, 5, 6] } }}
         months={[
           'Janeiro',
           'Fevereiro',
