@@ -11,5 +11,5 @@ export const Container = styled.View`
   shadow-offset: 0px 4px;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
-  elevation: 1;
+  elevation: 2;
 `;

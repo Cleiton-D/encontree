@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useMemo,
+  useState,
+  useCallback,
+} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -12,6 +18,8 @@ type HeaderProps = {
 };
 
 const Header = ({ defaultValue, onTextChange }: HeaderProps): JSX.Element => {
+  const [value, setValue] = useState(defaultValue);
+
   const inputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
@@ -22,6 +30,14 @@ const Header = ({ defaultValue, onTextChange }: HeaderProps): JSX.Element => {
   const handleSearchDelayed = useMemo(() => debounce(onTextChange, 1000), [
     onTextChange,
   ]);
+
+  const handleChange = useCallback(
+    (inputValue: string) => {
+      setValue(inputValue);
+      handleSearchDelayed(inputValue);
+    },
+    [handleSearchDelayed],
+  );
 
   return (
     <SafeAreaView>
@@ -39,8 +55,8 @@ const Header = ({ defaultValue, onTextChange }: HeaderProps): JSX.Element => {
           placeholder="Procurar..."
           returnKeyType="search"
           placeholderTextColor="#aaa"
-          defaultValue={defaultValue}
-          onChangeText={handleSearchDelayed}
+          value={value}
+          onChangeText={handleChange}
         />
       </InputContainer>
     </SafeAreaView>

@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import api from '../services/api';
 
@@ -48,6 +49,8 @@ type AuthProviderProps = {
   children: React.ReactNode;
 };
 const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
+  const history = useHistory();
+
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@EncontreeWeb:authToken');
     const user = localStorage.getItem('@EncontreeWeb:user');
@@ -64,26 +67,36 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     return {} as AuthState;
   });
 
-  const login = useCallback(async ({ email, password }: LoginCredentials) => {
-    const response = await api.post('sessions', {
-      email,
-      password,
-    });
+  const login = useCallback(
+    async ({ email, password }: LoginCredentials) => {
+      const response = await api.post('sessions', {
+        email,
+        password,
+      });
 
-    const { token, user } = response.data;
+      const { token, user } = response.data;
 
-    localStorage.setItem('@EncontreeWeb:authToken', token);
-    localStorage.setItem('@EncontreeWeb:user', JSON.stringify(user));
+      localStorage.setItem('@EncontreeWeb:authToken', token);
+      localStorage.setItem('@EncontreeWeb:user', JSON.stringify(user));
 
-    api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
-    const providerResponse = await api.get('/providers/show');
-    const provider = providerResponse.data;
+      try {
+        const providerResponse = await api.get('/providers/show');
+        const provider = providerResponse.data;
 
-    localStorage.setItem('@EncontreeWeb:provider', JSON.stringify(provider));
-
-    setData({ token, user, provider });
-  }, []);
+        localStorage.setItem(
+          '@EncontreeWeb:provider',
+          JSON.stringify(provider),
+        );
+        setData({ token, user, provider });
+      } catch {
+        setData({ token, user, provider: {} as Provider });
+        history.push('/profile');
+      }
+    },
+    [history],
+  );
 
   const logout = useCallback(() => {
     localStorage.removeItem('@EncontreeWeb:authToken');

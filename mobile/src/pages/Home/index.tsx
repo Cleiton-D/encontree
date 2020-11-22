@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Header from '../../components/Header';
@@ -17,20 +18,13 @@ const Dashboard = (): JSX.Element => {
     [navigation],
   );
 
-  const handleSelectCategory = useCallback(
-    (category: string) => {
-      navigation.navigate('Search', { category });
-    },
-    [navigation],
-  );
-
   return (
-    <>
+    <View>
       <Header>
         <DashboardHeader onSearch={handleSearch} />
       </Header>
-      <Default onSelectCategory={handleSelectCategory} />
-    </>
+      <Default />
+    </View>
   );
 };
 

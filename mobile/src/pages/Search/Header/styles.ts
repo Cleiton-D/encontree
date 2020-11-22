@@ -10,7 +10,7 @@ export const PageTitle = styled.Text`
 export const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
 
   background: #f3f3f3;
   height: 36px;
@@ -22,6 +22,6 @@ export const Input = styled.TextInput`
   height: 100%;
   flex: 1;
   margin-left: 10px;
-
+  color: #666;
   font-size: 14px;
 `;

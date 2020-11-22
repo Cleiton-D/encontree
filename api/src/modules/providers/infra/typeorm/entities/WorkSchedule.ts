@@ -23,7 +23,7 @@ class WorkSchedule {
   @JoinColumn({ name: 'provider_id' })
   provider: Provider;
 
-  @Column()
+  @Column({ type: 'enum' })
   day: Day;
 
   @Column()

@@ -28,6 +28,10 @@ class ListUserConversationsService {
       user_id,
     );
 
+    if (conversations.length === 0) {
+      return [];
+    }
+
     const users_ids = conversations.reduce<string[]>(
       (accumulator, conversation) => {
         const item = conversation.users_ids.find(user => user !== user_id);

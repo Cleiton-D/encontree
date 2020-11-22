@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Expose } from 'class-transformer';
 
 @Entity('categories')
 class Category {
@@ -22,6 +23,13 @@ class Category {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'image_url' })
+  getImageUrl(): string | null {
+    if (!this.image) return null;
+
+    return `${process.env.APP_API_URL}/files/${this.image}`;
+  }
 }
 
 export default Category;

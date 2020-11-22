@@ -75,6 +75,7 @@ const CreateSchedule = (): JSX.Element => {
           selectedDate.getDate(),
           selectedHour,
         );
+        date.setHours(selectedHour);
 
         const response = await api.post('schedules', {
           provider_id: params.providerId,
@@ -176,6 +177,7 @@ const CreateSchedule = (): JSX.Element => {
                       key={item.hour}
                       available={item.available}
                       selected={selectedHour === item.hour}
+                      disabled={!item.available}
                       onPress={() => handleSelectHour(item.hour)}
                     >
                       <ChooseHourItemText
@@ -193,6 +195,7 @@ const CreateSchedule = (): JSX.Element => {
                       key={item.hour}
                       available={item.available}
                       selected={selectedHour === item.hour}
+                      disabled={!item.available}
                       onPress={() => handleSelectHour(item.hour)}
                     >
                       <ChooseHourItemText

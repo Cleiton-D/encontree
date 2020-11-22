@@ -15,6 +15,7 @@ import ScheduleCreated from '../pages/ScheduleCreated';
 import Schedule from '../pages/Schedule';
 import Chat from '../pages/Chat';
 import Conversations from '../pages/Conversations';
+import About from '../pages/About';
 
 const tabs: TabsConfigsType = {
   Home: {
@@ -34,6 +35,7 @@ export type StackParamList = {
   Dashboard: undefined;
   EditProfile: undefined;
   Conversations: undefined;
+  About: undefined;
   CreateSchedule: { providerId: string };
   ScheduleCreated: { providerId: string; date: string };
   Schedule: { scheduleId: string };
@@ -72,6 +74,7 @@ const AppRoutes = (): JSX.Element => (
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
         headerTitleStyle: { display: 'none' },
+        cardStyle: { backgroundColor: '#fff' },
       }}
     />
     <Stack.Screen
@@ -91,6 +94,16 @@ const AppRoutes = (): JSX.Element => (
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
         headerTitle: 'Conversas',
+        headerTitleStyle: { fontSize: 22 },
+      }}
+    />
+    <Stack.Screen
+      name="About"
+      component={About}
+      options={{
+        headerBackImage: () => <Icon name="chevron-left" size={24} />,
+        headerBackTitleVisible: false,
+        headerTitle: 'Sobre',
         headerTitleStyle: { fontSize: 22 },
       }}
     />

@@ -18,13 +18,14 @@ export default class ProviderController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
-    const { category, search } = request.query;
+    const { category, search, limit } = request.query;
 
     const listProviders = container.resolve(ListProvidersService);
     const providers = await listProviders.execute({
       user_id,
       category_id: category as string,
       search: search as string,
+      limit: Number(limit),
     });
 
     return response.json(classToClass(providers));

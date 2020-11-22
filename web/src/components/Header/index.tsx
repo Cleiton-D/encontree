@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FiMessageSquare, FiPower } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
@@ -20,6 +20,8 @@ import {
 const Header = (): JSX.Element => {
   const { user, logout } = useAuth();
 
+  const [splittedName] = useMemo(() => user.name.split(' '), [user]);
+
   return (
     <Container>
       <Content>
@@ -31,7 +33,7 @@ const Header = (): JSX.Element => {
           <UserContent>
             <UserInfo>
               <Username>
-                Olá, <strong>Cleiton</strong>
+                Olá, <strong>{splittedName}</strong>
               </Username>
               <ProfileLink to="/profile">Meu perfil</ProfileLink>
             </UserInfo>

@@ -1,0 +1,73 @@
+version: "2.1"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: encontree
+      POSTGRES_DB: encontree
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+
+    networks:
+      - encontree_network
+
+  mongodb:
+    image: bitnami/mongodb
+    environment:
+      MONGODB_DATABASE: encontree
+      MONGODB_USERNAME: encontree
+      MONGODB_PASSWORD: encontree
+
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongodb:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+    networks:
+      - encontree_network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      APP_SECRET: fadsgklvabknafsvklsgdjksfnfjkbdnalvmasçldfmadsknbvlfsbn 
+      APP_API_URL: http://127.0.0.1:3333
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: encontree
+      POSTGRES_DATABASE: encontree
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      MONGODB_USERNAME: encontree
+      MONGODB_PASSWORD: encontree
+      MONGODB_DATABASE: encontree
+
+    ports:
+      - 3333:3333
+
+    networks:
+      - encontree_network
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    
+networks:
+  encontree_network:
+    driver: 'bridge'

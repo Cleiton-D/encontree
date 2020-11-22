@@ -68,10 +68,13 @@ export const DayNumberText = styled.Text<DayProps>`
   ${({ selected }) => css`
     font-size: 16px;
 
-    ${selected &&
-    css`
-      color: #fff;
-    `}
+    ${selected
+      ? css`
+          color: #fff;
+        `
+      : css`
+          color: #000;
+        `}
   `}
 `;
 

@@ -58,10 +58,7 @@ const Profile = (): JSX.Element => {
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
 
-        <MenuItem
-          activeOpacity={0.5}
-          onPress={() => handleNavigate('Dashboard')}
-        >
+        <MenuItem activeOpacity={0.5} onPress={() => handleNavigate('About')}>
           <Icon name="help-circle" size={30} color="#444" />
           <MenuItemText>Sobre</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />

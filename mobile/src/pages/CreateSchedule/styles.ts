@@ -45,6 +45,8 @@ export const ChooseHourTitleDate = styled.Text`
 
 export const ChooseHourSelectContainer = styled.View`
   flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
   margin: 0 auto;
 `;
 
@@ -57,7 +59,6 @@ export const ChooseHourItem = styled.TouchableOpacity<ChooseHourItemProps>`
   ${({ available, selected }) => css`
     justify-content: center;
     align-items: center;
-    margin-right: 14px;
     margin-bottom: 14px;
     padding: 10px 0;
     width: 62px;
@@ -84,7 +85,7 @@ export const ChooseHourItemText = styled.Text<ChooseHourItemProps>`
 
     ${!available &&
     css`
-      color: #666;
+      color: #bbb;
     `}
 
     ${selected &&

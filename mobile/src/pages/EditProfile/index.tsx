@@ -158,6 +158,7 @@ const EditProfile = (): JSX.Element => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 70}
       enabled
     >
       <ScrollView keyboardShouldPersistTaps="handled">

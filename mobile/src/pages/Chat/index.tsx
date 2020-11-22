@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { KeyboardAvoidingView, Platform, FlatList } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  FlatList,
+  View,
+  SafeAreaView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { parseISO, format } from 'date-fns';
@@ -106,7 +112,7 @@ const Chat = (): JSX.Element => {
   }, [params.userId, user.id]);
 
   return (
-    <>
+    <KeyboardAvoidingView enabled={false} style={{ height: '100%' }}>
       <Header>
         <ChatHeader userId={params.userId} />
       </Header>
@@ -144,7 +150,7 @@ const Chat = (): JSX.Element => {
           </InputContainer>
         </KeyboardAvoidingView>
       </Container>
-    </>
+    </KeyboardAvoidingView>
   );
 };
 

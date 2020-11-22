@@ -70,16 +70,17 @@ const SignIn = (): JSX.Element => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        style={{ flex: 1, width: '100%' }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        enabled
+      <ScrollView
+        contentContainerStyle={{ flex: 1 }}
+        keyboardShouldPersistTaps="handled"
       >
-        <Logo source={logo} />
-        <ScrollView
-          contentContainerStyle={{ flex: 1 }}
-          keyboardShouldPersistTaps="handled"
+        <KeyboardAvoidingView
+          style={{ flex: 1, width: '100%' }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          enabled
         >
+          <Logo source={logo} />
+
           <Container>
             <LoginImage source={banner} />
             <FormContainer ref={formRef} onSubmit={handleSignIn}>
@@ -106,14 +107,14 @@ const SignIn = (): JSX.Element => {
               </Button>
             </FormContainer>
           </Container>
-        </ScrollView>
-      </KeyboardAvoidingView>
-      <CreateAccountContainer>
-        <CreateAccountText>Ainda não tem uma conta?</CreateAccountText>
-        <CreateAccountButton onPress={handleNavigateSignUp}>
-          <CreateAccountButtonText>Registre-se</CreateAccountButtonText>
-        </CreateAccountButton>
-      </CreateAccountContainer>
+        </KeyboardAvoidingView>
+        <CreateAccountContainer>
+          <CreateAccountText>Ainda não tem uma conta?</CreateAccountText>
+          <CreateAccountButton onPress={handleNavigateSignUp}>
+            <CreateAccountButtonText>Registre-se</CreateAccountButtonText>
+          </CreateAccountButton>
+        </CreateAccountContainer>
+      </ScrollView>
     </SafeAreaView>
   );
 };

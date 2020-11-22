@@ -140,8 +140,6 @@ const Profile = (): JSX.Element => {
 
   const handleSaveWorkScheduleConfiguration = useCallback(
     async (data: WorkScheduleData) => {
-      console.log(data);
-
       try {
         const formData = Object.keys(data).map<WorkScheduleFormData>(key => {
           const item = data[key];
@@ -161,7 +159,7 @@ const Profile = (): JSX.Element => {
           description: 'Sua configuração foi salva com sucesso',
         });
       } catch (err) {
-        console.log(err);
+        console.error(err);
 
         addToast({
           type: 'error',

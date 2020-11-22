@@ -5,9 +5,12 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "node dist/shared/infra/http/server.js",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm": "node ./node_modules/typeorm/cli.js",
+    "createdb": "node dist/shared/infra/typeorm/initdb.js",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "dev:typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "dev:createdb": "ts-node-dev -r tsconfig-paths/register  src/shared/infra/typeorm/initdb.ts",
     "test": "jest"
   },
   "dependencies": {

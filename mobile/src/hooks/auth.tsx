@@ -62,6 +62,8 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
         await api.get('sessions/validate').catch(logout);
 
         setData({ token: token[1], user: JSON.parse(user[1]) });
+      } else {
+        logout();
       }
 
       setLoading(false);

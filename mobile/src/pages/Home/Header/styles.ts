@@ -24,7 +24,7 @@ export const UserAvatar = styled.Image`
 export const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
 
   background: #f3f3f3;
   height: 36px;
@@ -35,7 +35,7 @@ export const InputContainer = styled.View`
 export const Input = styled.TextInput`
   height: 100%;
   flex: 1;
+  color: #666;
   margin-left: 10px;
-
   font-size: 14px;
 `;

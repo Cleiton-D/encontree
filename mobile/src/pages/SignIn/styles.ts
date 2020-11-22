@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/native';
 import { Form } from '@unform/mobile';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { Platform } from 'react-native';
 
 export const Container = styled.View`
@@ -8,7 +7,8 @@ export const Container = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0 30px ${Platform.OS === 'android' ? 150 : 40}px;
+  padding: 0 30px 40px;
+  /* padding: 0 30px ${Platform.OS === 'android' ? 120 : 40}px; */
 `;
 
 export const Logo = styled.Image`
@@ -31,11 +31,10 @@ export const FormContainer = styled(Form)`
 `;
 
 export const CreateAccountContainer = styled.View`
-  position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
-  padding-bottom: ${10 + getBottomSpace()}px;
+  padding-bottom: 10px;
 
   flex-direction: row;
   align-items: center;

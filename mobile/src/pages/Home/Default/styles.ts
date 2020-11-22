@@ -3,10 +3,34 @@ import { FlatList } from 'react-native';
 
 import { Provider, Category } from '.';
 
-export const Container = styled.View``;
+export const Container = styled.ScrollView`
+  height: 100%;
+`;
+
+export const ProvidersContainer = styled.View`
+  margin-top: 20px;
+`;
+
+export const ProvidersTextContainer = styled.View`
+  padding: 0 24px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+`;
+
+export const ProvidersTitle = styled.Text`
+  font-size: 18px;
+`;
+
+export const ProvidersViewAllButton = styled.TouchableOpacity``;
+
+export const ProvidersViewAllButtonText = styled.Text`
+  font-size: 16px;
+  color: #666;
+`;
 
 export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
-  padding: 32px 24px 16px;
+  padding: 10px 10px 16px 25px;
   max-height: 260px;
 `;
 
@@ -35,11 +59,11 @@ export const ProviderName = styled.Text`
 `;
 
 export const CategoriesContainer = styled.View`
-  margin-top: 40px;
+  margin-top: 5px;
 `;
 
 export const CategoriesTextContainer = styled.View`
-  padding: 0 24px;
+  padding: 0 24px 0;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
@@ -49,15 +73,8 @@ export const CategoriesTitle = styled.Text`
   font-size: 18px;
 `;
 
-export const CategoriesViewAllButton = styled.TouchableOpacity``;
-
-export const CategoriesViewAllButtonText = styled.Text`
-  font-size: 16px;
-  color: #666;
-`;
-
 export const CategoriesList = styled(FlatList as new () => FlatList<Category>)`
-  padding: 10px 24px;
+  padding: 10px 10px 0 20px;
 `;
 
 export const CategoryContainer = styled.TouchableOpacity`

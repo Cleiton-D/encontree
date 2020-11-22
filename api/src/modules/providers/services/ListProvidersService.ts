@@ -7,6 +7,7 @@ type ListProvidersRequest = {
   user_id: string;
   category_id?: string;
   search?: string;
+  limit?: number;
 };
 
 @injectable()
@@ -20,6 +21,7 @@ class ListProvidersService {
     user_id,
     category_id,
     search,
+    limit,
   }: ListProvidersRequest): Promise<Provider[]> {
     const yourselfProvider = await this.providersRepository.findByUserId(
       user_id,
@@ -29,6 +31,7 @@ class ListProvidersService {
       except_provider_id: yourselfProvider?.id,
       category_id,
       search,
+      limit,
     });
 
     return providers;

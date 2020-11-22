@@ -42,14 +42,14 @@ class ProvidersRepository implements IProvidersRepository {
     except_provider_id,
     category_id,
     search,
+    limit,
   }: FindAllProvidersDTO): Promise<Provider[]> {
     const queryBuilder = this.ormManager
       .createQueryBuilder()
       .select('providers')
       .from(Provider, 'providers')
       .innerJoinAndSelect('providers.user', 'user')
-      .innerJoinAndSelect('providers.category', 'category')
-      .where('1 = 1');
+      .innerJoinAndSelect('providers.category', 'category');
 
     if (except_provider_id) {
       queryBuilder.andWhere('providers.id != :exceptProvider', {
@@ -73,6 +73,10 @@ class ProvidersRepository implements IProvidersRepository {
           });
         }),
       );
+    }
+
+    if (limit) {
+      queryBuilder.limit(limit);
     }
 
     return queryBuilder.getMany();

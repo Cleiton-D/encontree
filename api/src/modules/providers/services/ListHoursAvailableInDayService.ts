@@ -37,17 +37,18 @@ class ListHoursAvailableInDayService {
     year,
   }: ListHoursAvailableInDayRequest): Promise<ListHoursAvailableInDayResponse> {
     const daysOfWeek: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    const date = new Date(year, month, day);
 
     const [schedules, workSchedule] = await Promise.all([
       this.schedulesRepository.findInDayByProvider({
         provider_id,
         day,
-        month,
+        month: month + 1,
         year,
       }),
       this.workSchedulesRepository.findByProviderAndDay({
         providerId: provider_id,
-        day: daysOfWeek[day],
+        day: daysOfWeek[date.getDay()],
       }),
     ]);
 
@@ -68,7 +69,7 @@ class ListHoursAvailableInDayService {
         schedule => getHours(schedule.date) === hour,
       );
 
-      const compareDate = new Date(year, month, hour);
+      const compareDate = new Date(year, month, day, hour);
       return {
         hour,
         available: !hasScheduleInHour && isAfter(compareDate, currentDate),

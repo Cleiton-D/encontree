@@ -12,14 +12,14 @@ import theme from './styles/theme';
 
 const App = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <ToastProvider>
-      <AuthProvider>
-        <Router>
+    <Router>
+      <ToastProvider>
+        <AuthProvider>
           <Routes />
-        </Router>
-        <GlobalStyles />
-      </AuthProvider>
-    </ToastProvider>
+          <GlobalStyles />
+        </AuthProvider>
+      </ToastProvider>
+    </Router>
   </ThemeProvider>
 );
 

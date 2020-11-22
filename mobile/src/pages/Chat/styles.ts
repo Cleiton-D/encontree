@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
@@ -98,10 +98,10 @@ export const InputContainer = styled.View`
   flex-direction: row;
 
   bottom: ${10 + getBottomSpace()}px;
-  margin: 0 20px;
+  margin: 0 ${Platform.OS === 'ios' ? 20 : 10}px;
   padding: 7px;
   padding-left: 15px;
-  min-height: 55px;
+  height: 55px;
   border-radius: 25px;
 
   background: #f9fafd;

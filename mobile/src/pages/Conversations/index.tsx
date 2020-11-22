@@ -7,6 +7,7 @@ import {
   Container,
   ConversationList,
   ConversationItem,
+  ProviderInfo,
   ProviderImage,
   ProviderName,
   EndContainerIcon,
@@ -49,10 +50,14 @@ const Conversations = (): JSX.Element => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <ConversationItem onPress={() => handleNavigate(item.user.id)}>
-            <ProviderImage
-              source={{ uri: item.user.avatar_url || undefined }}
-            />
-            <ProviderName>{item.user.name}</ProviderName>
+            <ProviderInfo>
+              <ProviderImage
+                source={{ uri: item.user.avatar_url || undefined }}
+              />
+              <ProviderName numberOfLines={1} ellipsizeMode="tail">
+                {item.user.name}
+              </ProviderName>
+            </ProviderInfo>
             <EndContainerIcon name="chevron-right" size={24} color="#aaa" />
           </ConversationItem>
         )}

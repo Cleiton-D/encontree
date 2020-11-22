@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { FlatList } from 'react-native';
+import { FlatList, Platform, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { getBottomSpace } from 'react-native-iphone-x-helper';
@@ -13,7 +13,7 @@ export const Container = styled.View`
 export const ConversationList = styled(
   FlatList as new () => FlatList<Conversation>,
 )`
-  margin-top: 40px;
+  margin-top: ${Platform.OS === 'ios' ? 40 : 10}px;
   padding: 10px 20px;
   bottom: ${getBottomSpace()}px;
 `;
@@ -23,6 +23,7 @@ export const ConversationItem = styled.TouchableOpacity`
 
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   border-radius: 5px;
 
   height: 70px;
@@ -31,11 +32,19 @@ export const ConversationItem = styled.TouchableOpacity`
   margin-bottom: 20px;
 `;
 
+export const ProviderInfo = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+
+  overflow: hidden;
+`;
+
 export const ProviderImage = styled.Image`
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  margin-right: 15px;
+  margin-right: 5px;
 `;
 
 export const ProviderName = styled.Text`
@@ -43,6 +52,5 @@ export const ProviderName = styled.Text`
 `;
 
 export const EndContainerIcon = styled(Icon)`
-  position: absolute;
-  right: 10px;
+  margin-left: 10px;
 `;
