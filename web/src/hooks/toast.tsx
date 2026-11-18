@@ -19,10 +19,8 @@ const ToastProvider = ({ children }: ToastProviderProps): JSX.Element => {
 
   const addToast = useCallback(
     ({ type, title, description, time }: Omit<Message, 'key'>) => {
-      const key = uuid.v4();
-
       const item = {
-        key,
+        key: uuid.v4(),
         type,
         title,
         description,

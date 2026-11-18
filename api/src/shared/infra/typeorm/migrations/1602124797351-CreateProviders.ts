@@ -1,5 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
+import { UUID_DEFAULT } from '../uuid-default';
+
 export default class CreateProviders1602124797351
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -12,7 +14,7 @@ export default class CreateProviders1602124797351
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            default: UUID_DEFAULT,
           },
           {
             name: 'description',

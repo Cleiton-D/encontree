@@ -1,5 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
+import { UUID_DEFAULT } from '../uuid-default';
+
 export default class CreateUsers1602124238476 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -12,7 +14,7 @@ export default class CreateUsers1602124238476 implements MigrationInterface {
             isPrimary: true,
             isNullable: false,
             generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            default: UUID_DEFAULT,
           },
           {
             name: 'name',
