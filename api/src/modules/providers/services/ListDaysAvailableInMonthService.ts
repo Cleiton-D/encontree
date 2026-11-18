@@ -16,7 +16,7 @@ type ListDaysAvailableInMonthResponse = Array<{
   available: boolean;
 }>;
 
-type Day = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+type Day = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 @injectable()
 class ListDaysAvailableInMonthService {
@@ -53,7 +53,7 @@ class ListDaysAvailableInMonthService {
       (_, index) => index + 1,
     );
 
-    const daysOfWeek: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    const daysOfWeek: Day[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
     const daysAvailability = daysOfMonth.map(day => {
       const date = new Date(year, month, day);

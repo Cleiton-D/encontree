@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import MonthPicker, { Event } from 'react-native-month-year-picker';
 import { format, getDaysInMonth, parseISO } from 'date-fns';
-import ptBr from 'date-fns/locale/pt-BR';
+import enUS from 'date-fns/locale/en-US';
 
 import {
   Container,
@@ -76,7 +76,7 @@ const Schedules = (): JSX.Element => {
   );
 
   const formatedDate = useMemo(
-    () => format(date, "MMMM', 'yyyy", { locale: ptBr }),
+    () => format(date, "MMMM', 'yyyy", { locale: enUS }),
     [date],
   );
 
@@ -85,7 +85,7 @@ const Schedules = (): JSX.Element => {
 
     return Array.from({ length: lastDayOfMonth }, (_, index) => {
       const day = new Date(date.getFullYear(), date.getMonth(), index + 1);
-      const formated = format(day, 'eee', { locale: ptBr });
+      const formated = format(day, 'eee', { locale: enUS });
 
       return { day: index + 1, description: formated };
     });
@@ -127,7 +127,7 @@ const Schedules = (): JSX.Element => {
   return (
     <Container>
       <Content>
-        <PageTitle>Agendamentos</PageTitle>
+        <PageTitle>Appointments</PageTitle>
         <MonthContainer onPress={handleMonthPicker}>
           <Month>{formatedDate}</Month>
           <Icon name="calendar" color="#000" size={20} />
@@ -186,9 +186,9 @@ const Schedules = (): JSX.Element => {
               onChange={handleSelectMonth}
               minimumDate={new Date(1991, 0)}
               maximumDate={new Date(2025, 5)}
-              locale="pt"
-              okButton="Selecionar"
-              cancelButton="Cancelar"
+              locale="en"
+              okButton="Select"
+              cancelButton="Cancel"
             />
           </MonthPickerContainer>
         )}

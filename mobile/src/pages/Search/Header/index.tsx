@@ -45,14 +45,14 @@ const Header = ({ defaultValue, onTextChange }: HeaderProps): JSX.Element => {
         <TouchableOpacity onPress={navigation.goBack}>
           <Icon name="chevron-left" size={20} />
         </TouchableOpacity>
-        <PageTitle>Resultados da pesquisa</PageTitle>
+        <PageTitle>Search results</PageTitle>
       </PageTopContainer>
       <InputContainer>
         <Icon name="search" size={18} color="#999" />
         <Input
           ref={inputRef}
           autoCapitalize="words"
-          placeholder="Procurar..."
+          placeholder="Search..."
           returnKeyType="search"
           placeholderTextColor="#aaa"
           value={value}

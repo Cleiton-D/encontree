@@ -14,7 +14,7 @@ type CreateScheduleRequest = {
   date: string;
 };
 
-type Day = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+type Day = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 @injectable()
 class CreateScheduleService {
@@ -56,7 +56,7 @@ class CreateScheduleService {
       throw new AppError('You can only create a schedule with yourself');
     }
 
-    const days: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    const days: Day[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     const dayStr = days[parsedDate.getDay()];
 
     const workSchedule = await this.workSchedulesRepository.findByProviderAndDay(
@@ -84,7 +84,7 @@ class CreateScheduleService {
       date: dateWithoutMinutes,
     });
 
-    // TODO criar implementação para notificações
+    // TODO implement notifications
 
     return schedule;
   }

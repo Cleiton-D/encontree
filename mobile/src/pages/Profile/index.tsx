@@ -28,9 +28,9 @@ const Profile = (): JSX.Element => {
   );
 
   const handleLogout = useCallback(() => {
-    Alert.alert('Sair do Encontree', 'Deseja realmente sair do Encontree?', [
-      { text: 'Não' },
-      { text: 'Sim', onPress: logout },
+    Alert.alert('Sign out of Encontree', 'Do you really want to sign out of Encontree?', [
+      { text: 'No' },
+      { text: 'Yes', onPress: logout },
     ]);
   }, [logout]);
 
@@ -45,7 +45,7 @@ const Profile = (): JSX.Element => {
           onPress={() => handleNavigate('EditProfile')}
         >
           <Icon name="user" size={30} color="#444" />
-          <MenuItemText>Editar Perfil</MenuItemText>
+          <MenuItemText>Edit Profile</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
 
@@ -54,19 +54,19 @@ const Profile = (): JSX.Element => {
           onPress={() => handleNavigate('Conversations')}
         >
           <Icon name="message-circle" size={30} color="#444" />
-          <MenuItemText>Conversas</MenuItemText>
+          <MenuItemText>Conversations</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
 
         <MenuItem activeOpacity={0.5} onPress={() => handleNavigate('About')}>
           <Icon name="help-circle" size={30} color="#444" />
-          <MenuItemText>Sobre</MenuItemText>
+          <MenuItemText>About</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
 
         <MenuItem activeOpacity={0.5} onPress={handleLogout}>
           <Icon name="power" size={30} color="#444" />
-          <MenuItemText>Sair</MenuItemText>
+          <MenuItemText>Sign out</MenuItemText>
           <MenuChevronIcon name="chevron-right" size={24} />
         </MenuItem>
       </Content>

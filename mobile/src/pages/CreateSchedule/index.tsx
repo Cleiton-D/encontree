@@ -90,8 +90,8 @@ const CreateSchedule = (): JSX.Element => {
         });
       } catch {
         Alert.alert(
-          'Erro ao criar agendamento',
-          'Não foi possivel criar o agendamento, tente novamente.',
+          'Failed to create appointment',
+          'Could not create the appointment, please try again.',
         );
       }
 
@@ -147,15 +147,15 @@ const CreateSchedule = (): JSX.Element => {
       </Header>
       <Content>
         <ChooseDateContainer>
-          <ChooseDateTitle>Escolha a data</ChooseDateTitle>
-          <Button onPress={handleShowDatePicker}>Selecionar uma data</Button>
+          <ChooseDateTitle>Choose a date</ChooseDateTitle>
+          <Button onPress={handleShowDatePicker}>Select a date</Button>
 
           <DateTimePickerModal
             isVisible={showDatePicker}
             onConfirm={handleSelectDate}
             onCancel={() => setShowDatePicker(false)}
             date={selectedDate}
-            locale="pt-BR"
+            locale="en-US"
             minimumDate={new Date()}
           />
         </ChooseDateContainer>
@@ -163,7 +163,7 @@ const CreateSchedule = (): JSX.Element => {
         {selectedDate && (
           <ChooseHourContainer>
             <ChooseHourTitleContainer>
-              <ChooseHourTitle>Escolha o horário</ChooseHourTitle>
+              <ChooseHourTitle>Choose a time</ChooseHourTitle>
               <ChooseHourTitleDate>{formatedDate}</ChooseHourTitleDate>
             </ChooseHourTitleContainer>
 
@@ -215,7 +215,7 @@ const CreateSchedule = (): JSX.Element => {
         {selectedDate && selectedHour && (
           <ReserveButtonWrapper>
             <Button onPress={handleCreateSchedule}>
-              {loadingReserve ? 'Agendando...' : 'Agendar'}
+              {loadingReserve ? 'Booking...' : 'Book'}
             </Button>
           </ReserveButtonWrapper>
         )}

@@ -5,61 +5,61 @@ export default class CategoriesSeed1602206578890 implements MigrationInterface {
   public async up(): Promise<void> {
     const respository = getRepository(Category);
 
-    const limpeza = respository.create({
-      description: 'Profissional de limpeza',
-      image: 'limpeza.jpg',
+    const cleaning = respository.create({
+      description: 'Cleaning professional',
+      image: 'cleaning.jpg',
     });
 
-    const eletricista = respository.create({
-      description: 'Técnico eletricista',
-      image: 'eletrica.jpg',
+    const electrician = respository.create({
+      description: 'Electrician',
+      image: 'electrician.jpg',
     });
 
-    const informatica = respository.create({
-      description: 'Técnico de informática',
-      image: 'informatica.jpg',
+    const itTechnician = respository.create({
+      description: 'IT technician',
+      image: 'it-technician.jpg',
     });
 
-    const freteiro = respository.create({
-      description: 'Freteiro/Transportes',
-      image: 'transporte.jpg',
+    const transport = respository.create({
+      description: 'Moving/Transport',
+      image: 'transport.jpg',
     });
 
-    const montador = respository.create({
-      description: 'Montador de móveis',
-      image: 'moveis.jpg',
+    const furnitureAssembler = respository.create({
+      description: 'Furniture assembler',
+      image: 'furniture.jpg',
     });
 
-    const encanador = respository.create({
-      description: 'Técnico hidrálico/encanador',
-      image: 'encanador.png',
+    const plumber = respository.create({
+      description: 'Plumber',
+      image: 'plumber.png',
     });
 
-    const salao = respository.create({
-      description: 'Salão de beleza',
-      image: 'salao.png',
+    const beautySalon = respository.create({
+      description: 'Beauty salon',
+      image: 'beauty-salon.png',
     });
 
-    const barbearia = respository.create({
-      description: 'Barbearia',
-      image: 'barbearia.jpg',
+    const barbershop = respository.create({
+      description: 'Barbershop',
+      image: 'barbershop.jpg',
     });
 
-    const jardinagem = respository.create({
-      description: 'Jardinagem',
-      image: 'jardinagem.jpg',
+    const gardening = respository.create({
+      description: 'Gardening',
+      image: 'gardening.jpg',
     });
 
     await Promise.all([
-      respository.save(limpeza),
-      respository.save(eletricista),
-      respository.save(informatica),
-      respository.save(freteiro),
-      respository.save(montador),
-      respository.save(encanador),
-      respository.save(salao),
-      respository.save(barbearia),
-      respository.save(jardinagem),
+      respository.save(cleaning),
+      respository.save(electrician),
+      respository.save(itTechnician),
+      respository.save(transport),
+      respository.save(furnitureAssembler),
+      respository.save(plumber),
+      respository.save(beautySalon),
+      respository.save(barbershop),
+      respository.save(gardening),
     ]);
   }
 

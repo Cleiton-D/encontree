@@ -1,40 +1,67 @@
-# Encontree 
- 
-O Encontree é um projeto open source utilizado inicalmente como parte do Trabalho de Conclusão de Curso (TCC) do curso de Sistemas de Informação das Faculdades Integradas de Cacoal - UNESC.
+# Encontree
 
-## Executando o projeto
+Encontree is an open source project originally built as the final undergraduate project (TCC) of the Information Systems program at Faculdades Integradas de Cacoal - UNESC.
 
-Para iniciar a API, a interface web e os bancos de dados basta executar:
-obs.: Necessita que o docker e docker-compose estejam instalados na máquina.
+The repository has three apps:
+
+- `api`: Node.js + Express + TypeORM (PostgreSQL and MongoDB)
+- `web`: React web app for service providers
+- `mobile`: React Native app for clients
+
+## Running the project
+
+Docker and docker-compose must be installed.
+
+Copy `.env.example` to `.env` and fill in the secrets (for example with `openssl rand -hex 32`):
+
+```sh
+cp .env.example .env
+```
+
+Then start the API, the web app and the databases:
+
 ```sh
 docker-compose up -d --build
 ```
-Ele irá baixar todas as dependencias, fazer a build da aplicação e subir seus respectivos containers.
 
-Após o fim das instalações, basta acessar o endereço `http://localhost` no seu navegador.
+This installs all dependencies, builds the apps and starts their containers.
 
+When it finishes, open `http://localhost` in your browser.
 
-### mobile
+### Mobile
 
-Para a execução do aplicativo mobile no android é necessário que o Java JDK e o Android SDK estejam instalados, além de um emulador ou dispositivo devidamente configurado.
+To run the mobile app on Android you need the Java JDK and the Android SDK installed, plus a configured emulator or device.
 
-Para iniciar a aplicação:
-acesse a pasta `mobile` e execute o seguinte comando para baixar as dependencias
+Install the dependencies from the `mobile` folder:
+
 ```sh
 npm install
 ```
 
-Após a instalação das dependencias, caso esteja no IOS acesse a pasta `ios` e execute o seguinte comando para instalar as dependencias nativas do IOS:
-obs.: Necessita que o cocoapods esteja instalador na máquina.
+Android debug builds are signed with `android/app/debug.keystore`, which is not committed. Generate one with:
+
+```sh
+keytool -genkeypair -v -keystore android/app/debug.keystore -storepass android \
+  -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 \
+  -dname "CN=Android Debug,O=Android,C=US"
+```
+
+On iOS, go to the `ios` folder and install the native dependencies (CocoaPods must be installed):
+
 ```sh
 pod install
 ```
 
-Por fim, basta executar os seguintes comandos para iniciar a aplicação no IOS ou no Android:
+Finally, start the app on iOS or Android:
+
 ```sh
-#ios
+# ios
 npm run ios
 
-#android
+# android
 npm run android
 ```
+
+## License
+
+[MIT](LICENSE)

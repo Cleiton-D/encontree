@@ -26,9 +26,9 @@ const SignUp = (): JSX.Element => {
       try {
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('Informe seu email'),
-          password: Yup.string().required('Informe sua senha'),
+            .email('Enter a valid email')
+            .required('Email is required'),
+          password: Yup.string().required('Password is required'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -37,16 +37,16 @@ const SignUp = (): JSX.Element => {
 
         addToast({
           type: 'success',
-          title: 'Cadastro realizado com sucesso',
+          title: 'Account created successfully',
           description:
-            'Seu cadastro foi realizado com sucesso, faça login para continuar',
+            'Your account was created successfully, sign in to continue',
         });
       } catch {
         addToast({
           type: 'error',
-          title: 'Erro ao realizar cadastro',
+          title: 'Sign up failed',
           description:
-            'Ocorreu um erro na realização do cadastro, cheque seus dados',
+            'An error occurred while creating your account, check your details',
         });
       }
     },
@@ -59,36 +59,36 @@ const SignUp = (): JSX.Element => {
       <Content>
         <Logo />
         <FormWrapper>
-          <h1>Faça seu cadastro</h1>
+          <h1>Create your account</h1>
           <Form onSubmit={handleSubmit}>
             <Input
               type="text"
-              label="Nome"
+              label="Name"
               name="name"
-              placeholder="Digite seu nome"
+              placeholder="Enter your name"
             />
             <Input
               type="text"
               label="Email"
               name="email"
-              placeholder="Digite seu email"
+              placeholder="Enter your email"
             />
             <Input
               type="text"
-              label="Nome de usuário"
+              label="Username"
               name="username"
-              placeholder="Digite um nome de usuário"
+              placeholder="Enter a username"
             />
             <Input
               type="password"
-              label="Senha"
+              label="Password"
               name="password"
-              placeholder="Crie uma senha"
+              placeholder="Create a password"
             />
-            <Button type="submit">Criar conta</Button>
+            <Button type="submit">Create account</Button>
           </Form>
           <span>
-            Já tem uma conta? <Link to="/">Entrar</Link>
+            Already have an account? <Link to="/">Sign in</Link>
           </span>
         </FormWrapper>
       </Content>

@@ -92,15 +92,15 @@ const Profile = (): JSX.Element => {
 
           addToast({
             type: 'success',
-            title: 'Foto atualizada',
-            description: 'Sua foto de perfil foi alterada com sucesso',
+            title: 'Photo updated',
+            description: 'Your profile photo was changed successfully',
           });
         } catch {
           addToast({
             type: 'error',
-            title: 'Erro ao atualizar foto',
+            title: 'Photo update failed',
             description:
-              'Ocorreu um erro ao tentar atualizar sua foto do perfil, tente novamente',
+              'An error occurred while updating your profile photo, please try again',
           });
         }
       }
@@ -123,15 +123,15 @@ const Profile = (): JSX.Element => {
 
         addToast({
           type: 'success',
-          title: 'Configuração salva com sucesso',
-          description: 'Sua configuração foi salva com sucesso',
+          title: 'Settings saved successfully',
+          description: 'Your settings were saved successfully',
         });
       } catch {
         addToast({
           type: 'error',
-          title: 'Erro ao salvar configuração',
+          title: 'Failed to save settings',
           description:
-            'Ocorreu um erro ao salvar sua configuração, cheque seus dados',
+            'An error occurred while saving your settings, check your details',
         });
       }
     },
@@ -155,17 +155,17 @@ const Profile = (): JSX.Element => {
         await api.put('/providers/workschedules', formData);
         addToast({
           type: 'success',
-          title: 'Configuração salva com sucesso',
-          description: 'Sua configuração foi salva com sucesso',
+          title: 'Settings saved successfully',
+          description: 'Your settings were saved successfully',
         });
       } catch (err) {
         console.error(err);
 
         addToast({
           type: 'error',
-          title: 'Erro ao salvar configuração',
+          title: 'Failed to save settings',
           description:
-            'Ocorreu um erro ao salvar sua configuração, cheque seus dados',
+            'An error occurred while saving your settings, check your details',
         });
       }
     },
@@ -207,7 +207,7 @@ const Profile = (): JSX.Element => {
 
   return (
     <Container>
-      <PageTile>Meu Perfil</PageTile>
+      <PageTile>My Profile</PageTile>
       <Content>
         <UserContent>
           <UserAvatar avatarUrl={user.avatar_url}>
@@ -221,21 +221,21 @@ const Profile = (): JSX.Element => {
             <Usernick>{user.username}</Usernick>
             <UserEmail>{user.email}</UserEmail>
             <EditInfoButton onClick={handleOpenModal}>
-              Editar Informações
+              Edit Details
             </EditInfoButton>
           </UserInfo>
         </UserContent>
 
         <ConfigurationContainer>
-          <ConfigurationTitle>Outras configurações</ConfigurationTitle>
+          <ConfigurationTitle>Other settings</ConfigurationTitle>
           <ConfigurationForm
             onSubmit={handleSaveConfiguration}
             initialData={provider}
           >
             <Combo
               name="category_id"
-              label="Categoria"
-              placeholder="Selecione uma categoria"
+              label="Category"
+              placeholder="Select a category"
             >
               {categories.map(category => (
                 <Option key={category.id} value={category.id}>
@@ -245,30 +245,30 @@ const Profile = (): JSX.Element => {
             </Combo>
             <Textarea
               name="description"
-              label="Descrição"
-              placeholder="Crie uma breve descrição para você"
+              label="Description"
+              placeholder="Write a short description about yourself"
             />
             <SaveConfigurationButton type="submit">
-              Salvar
+              Save
             </SaveConfigurationButton>
           </ConfigurationForm>
         </ConfigurationContainer>
 
         <ScheduleTimesContainer>
-          <ScheduleTimesTitle>Horários de trabalho</ScheduleTimesTitle>
+          <ScheduleTimesTitle>Working hours</ScheduleTimesTitle>
           <SchedulesTimeForm
             onSubmit={handleSaveWorkScheduleConfiguration}
             initialData={workSchedules}
           >
-            <TimeInputRange name="dom" label="Domingo" />
-            <TimeInputRange name="seg" label="Segunda-feira" />
-            <TimeInputRange name="ter" label="Terça-feira" />
-            <TimeInputRange name="qua" label="Quarta-feira" />
-            <TimeInputRange name="qui" label="Quinta-feira" />
-            <TimeInputRange name="sex" label="Sexta-feira" />
-            <TimeInputRange name="sab" label="Sábado" />
+            <TimeInputRange name="sun" label="Sunday" />
+            <TimeInputRange name="mon" label="Monday" />
+            <TimeInputRange name="tue" label="Tuesday" />
+            <TimeInputRange name="wed" label="Wednesday" />
+            <TimeInputRange name="thu" label="Thursday" />
+            <TimeInputRange name="fri" label="Friday" />
+            <TimeInputRange name="sat" label="Saturday" />
             <ShedulesTimeSaveButton type="submit">
-              Salvar
+              Save
             </ShedulesTimeSaveButton>
           </SchedulesTimeForm>
         </ScheduleTimesContainer>

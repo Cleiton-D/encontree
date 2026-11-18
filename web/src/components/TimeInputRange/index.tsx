@@ -83,7 +83,7 @@ const TimeInputRange = ({ name, label }: TimeInputRangeProps): JSX.Element => {
           defaultChecked={data.available}
           onChange={handleChangeCheckBox}
         />
-        <span>Não disponível</span>
+        <span>Not available</span>
       </NotAvailableLabel>
     </Container>
   );

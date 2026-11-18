@@ -63,20 +63,20 @@ const EditInfoModal = (
           name: Yup.string().required(),
           username: Yup.string().required(),
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('Informe seu email'),
+            .email('Enter a valid email')
+            .required('Email is required'),
           old_password: Yup.string(),
           password: Yup.string().when('old_password', {
             is: value => !!value.lenght,
-            then: Yup.string().required('Digite sua nova senha'),
+            then: Yup.string().required('Enter your new password'),
             otherwise: Yup.string(),
           }),
           password_confirmation: Yup.string()
             .when('old_password', {
               is: value => !!value.lenght,
-              then: Yup.string().required('Confirme sua nova senha'),
+              then: Yup.string().required('Confirm your new password'),
             })
-            .oneOf([Yup.ref('password')], 'As senhas não conferem'),
+            .oneOf([Yup.ref('password')], 'Passwords do not match'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -106,15 +106,15 @@ const EditInfoModal = (
 
         addToast({
           type: 'success',
-          title: 'Cadastro atualizado com sucesso',
-          description: 'Seus dados foram atualizados com sucesso',
+          title: 'Profile updated successfully',
+          description: 'Your details were updated successfully',
         });
       } catch {
         addToast({
           type: 'error',
-          title: 'Erro ao atualizar cadastro',
+          title: 'Profile update failed',
           description:
-            'Ocorreu um erro ao atualizar seu cadastro, cheque seus dados',
+            'An error occurred while updating your profile, check your details',
         });
       }
     },
@@ -125,20 +125,20 @@ const EditInfoModal = (
     return (
       <Modal>
         <Container ref={containerRef}>
-          <ModalTitle>Editar informações</ModalTitle>
+          <ModalTitle>Edit details</ModalTitle>
           <Form onSubmit={handleSubmit} initialData={user}>
-            <Input name="name" label="Nome" placeholder="Digite seu nome" />
+            <Input name="name" label="Name" placeholder="Enter your name" />
             <Input
               icon={FiAtSign}
               name="username"
-              label="Nome de usuário"
-              placeholder="Digite um nome de usuário"
+              label="Username"
+              placeholder="Enter a username"
             />
             <Input
               type="email"
               name="email"
               label="email"
-              placeholder="Digite seu email"
+              placeholder="Enter your email"
             />
 
             <Separator />
@@ -146,22 +146,22 @@ const EditInfoModal = (
             <Input
               type="password"
               name="old_password"
-              label="Senha atual"
-              placeholder="Digite sua senha atual"
+              label="Current password"
+              placeholder="Enter your current password"
             />
             <Input
               type="password"
               name="password"
-              label="Nova senha"
-              placeholder="Digite sua nova senha"
+              label="New password"
+              placeholder="Enter your new password"
             />
             <Input
               type="password"
               name="password_confirmation"
-              label="Confirmar senha"
-              placeholder="Confirme sua nova senha"
+              label="Confirm password"
+              placeholder="Confirm your new password"
             />
-            <SaveButton>Salvar</SaveButton>
+            <SaveButton>Save</SaveButton>
           </Form>
         </Container>
       </Modal>

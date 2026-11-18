@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import Provider from './Provider';
 
-type Day = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+type Day = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 @Entity('work_schedules')
 class WorkSchedule {

@@ -52,15 +52,15 @@ const EditProfile = (): JSX.Element => {
           name: Yup.string().required(),
           username: Yup.string().required(),
           email: Yup.string()
-            .email('Digite um email válido')
-            .required('Informe seu email'),
+            .email('Enter a valid email')
+            .required('Email is required'),
           old_password: Yup.string(),
           password: Yup.string()
             .when('old_password', {
               is: value => !!value.lenght,
-              then: Yup.string().required('Confirme sua nova senha'),
+              then: Yup.string().required('Confirm your new password'),
             })
-            .oneOf([Yup.ref('password')], 'As senhas não conferem'),
+            .oneOf([Yup.ref('password')], 'Passwords do not match'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -87,15 +87,15 @@ const EditProfile = (): JSX.Element => {
         updateUser(response.data);
 
         Alert.alert(
-          'Cadastro atualizado',
-          'Seus dados foram atualizados com com sucesso',
+          'Profile updated',
+          'Your details were updated successfully',
         );
 
         navigation.goBack();
       } catch {
         Alert.alert(
-          'Erro ao atualizar cadastro',
-          'Ocorreu um erro na atualização do cadastro, tente novamente',
+          'Profile update failed',
+          'An error occurred while updating your profile, please try again',
         );
       }
     },
@@ -104,9 +104,9 @@ const EditProfile = (): JSX.Element => {
 
   const handleCaptureImage = useCallback(() => {
     return new Promise<Image>((resolve, reject) => {
-      Alert.alert('Selecionar foto de perfil', '', [
+      Alert.alert('Select profile photo', '', [
         {
-          text: 'Abrir câmera',
+          text: 'Open camera',
           onPress: () => {
             ImagePicker.openCamera({
               cropperCircleOverlay: true,
@@ -117,7 +117,7 @@ const EditProfile = (): JSX.Element => {
           },
         },
         {
-          text: 'Selecionar da galeria',
+          text: 'Choose from gallery',
           onPress: () => {
             ImagePicker.openPicker({
               cropperCircleOverlay: true,
@@ -127,7 +127,7 @@ const EditProfile = (): JSX.Element => {
               .catch(reject);
           },
         },
-        { text: 'Cancelar' },
+        { text: 'Cancel' },
       ]);
     });
   }, []);
@@ -147,11 +147,11 @@ const EditProfile = (): JSX.Element => {
       updateUser(response.data);
 
       Alert.alert(
-        'Sua foto atualizada.',
-        'Sua foto de perfil foi atualizada com sucesso.',
+        'Photo updated.',
+        'Your profile photo was updated successfully.',
       );
     } catch {
-      Alert.alert('Erro ao atualizar sua foto de perfil.');
+      Alert.alert('Failed to update your profile photo.');
     }
   }, [user.id, handleCaptureImage, updateUser]);
 
@@ -181,14 +181,14 @@ const EditProfile = (): JSX.Element => {
             <Input
               autoCapitalize="words"
               name="name"
-              placeholder="Digite seu nome"
+              placeholder="Enter your name"
               returnKeyType="next"
               onSubmitEditing={() => emailInputRef.current?.focus()}
             />
             <Input
               autoCapitalize="words"
               name="username"
-              placeholder="Crie um nome de usuário"
+              placeholder="Create a username"
               returnKeyType="next"
               onSubmitEditing={() => emailInputRef.current?.focus()}
             />
@@ -197,7 +197,7 @@ const EditProfile = (): JSX.Element => {
               autoCapitalize="none"
               keyboardType="email-address"
               name="email"
-              placeholder="Digite seu email"
+              placeholder="Enter your email"
               ref={emailInputRef}
               returnKeyType="next"
               onSubmitEditing={() => currentPasswordInputRef.current?.focus()}
@@ -208,7 +208,7 @@ const EditProfile = (): JSX.Element => {
               secureTextEntry
               textContentType="newPassword"
               name="old_password"
-              placeholder="Digite sua senha atual"
+              placeholder="Enter your current password"
               ref={currentPasswordInputRef}
               returnKeyType="next"
               onSubmitEditing={() => newPasswordInputRef.current?.focus()}
@@ -217,7 +217,7 @@ const EditProfile = (): JSX.Element => {
               secureTextEntry
               textContentType="newPassword"
               name="password"
-              placeholder="Digite sua nova senha"
+              placeholder="Enter your new password"
               ref={newPasswordInputRef}
               returnKeyType="next"
               onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
@@ -226,14 +226,14 @@ const EditProfile = (): JSX.Element => {
               secureTextEntry
               textContentType="newPassword"
               name="password_confirmation"
-              placeholder="Confirme sua nova senha"
+              placeholder="Confirm your new password"
               ref={confirmPasswordInputRef}
               returnKeyType="send"
               onSubmitEditing={() => formRef.current?.submitForm()}
             />
 
             <Button onPress={() => formRef.current?.submitForm()}>
-              Salvar
+              Save
             </Button>
           </FormContainer>
         </Container>

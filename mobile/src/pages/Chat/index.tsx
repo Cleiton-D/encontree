@@ -138,7 +138,7 @@ const Chat = (): JSX.Element => {
         >
           <InputContainer>
             <MessageInput
-              placeholder="Digite uma mensagem"
+              placeholder="Type a message"
               placeholderTextColor="#999"
               onChangeText={value => {
                 inputValueRef.current.value = value;

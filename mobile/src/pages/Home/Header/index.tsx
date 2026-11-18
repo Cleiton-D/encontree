@@ -57,7 +57,7 @@ const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
   return (
     <Container>
       <UserContainer>
-        <UserName>Olá, {fistName}</UserName>
+        <UserName>Hi, {fistName}</UserName>
         <UserAvatar source={{ uri: user.avatar_url || undefined }} />
       </UserContainer>
       <InputContainer>
@@ -65,7 +65,7 @@ const Header = ({ onSearch }: DashboardHeaderProps): JSX.Element => {
         <Input
           ref={inputRef}
           autoCapitalize="words"
-          placeholder="Procurar..."
+          placeholder="Search..."
           returnKeyType="search"
           placeholderTextColor="#aaa"
           onChangeText={value => {

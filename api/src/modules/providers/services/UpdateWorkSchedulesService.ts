@@ -5,7 +5,7 @@ import IProvidersRepository from '../repositories/IProvidersRepository';
 import IWorkSchedulesRepository from '../repositories/IWorkSchedulesRepository';
 import WorkSchedule from '../infra/typeorm/entities/WorkSchedule';
 
-type WorkScheduleDay = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+type WorkScheduleDay = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 type WorkScheduleRequest = {
   start: number;
   end: number;

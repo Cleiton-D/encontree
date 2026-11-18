@@ -85,9 +85,9 @@ const Default = (): JSX.Element => {
     <Container>
       <ProvidersContainer>
         <ProvidersTextContainer>
-          <ProvidersTitle>Prestadores de serviço</ProvidersTitle>
+          <ProvidersTitle>Service providers</ProvidersTitle>
           <ProvidersViewAllButton onPress={handleViewAll}>
-            <ProvidersViewAllButtonText>Ver todos</ProvidersViewAllButtonText>
+            <ProvidersViewAllButtonText>See all</ProvidersViewAllButtonText>
           </ProvidersViewAllButton>
         </ProvidersTextContainer>
         <ProvidersList
@@ -115,7 +115,7 @@ const Default = (): JSX.Element => {
 
       <CategoriesContainer>
         <CategoriesTextContainer>
-          <CategoriesTitle>Categorias</CategoriesTitle>
+          <CategoriesTitle>Categories</CategoriesTitle>
         </CategoriesTextContainer>
         <CategoriesList
           horizontal

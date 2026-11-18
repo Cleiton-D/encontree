@@ -31,9 +31,9 @@ const SignIn = (): JSX.Element => {
       try {
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('Informe seu email'),
-          password: Yup.string().required('Informe sua senha'),
+            .email('Enter a valid email')
+            .required('Email is required'),
+          password: Yup.string().required('Password is required'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -41,9 +41,9 @@ const SignIn = (): JSX.Element => {
       } catch {
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
+          title: 'Authentication failed',
           description:
-            'Ocorreu um erro ao fazer login, cheque suas credenciais',
+            'An error occurred while signing in, check your credentials',
         });
       }
     },
@@ -56,24 +56,24 @@ const SignIn = (): JSX.Element => {
       <Content>
         <Logo />
         <FormWrapper>
-          <h1>Faça seu login</h1>
+          <h1>Sign in</h1>
           <Form onSubmit={handleSubmit}>
             <Input
               type="text"
               label="Email"
               name="email"
-              placeholder="Digite seu email"
+              placeholder="Enter your email"
             />
             <Input
               type="password"
-              label="Senha"
+              label="Password"
               name="password"
-              placeholder="Digite sua senha"
+              placeholder="Enter your password"
             />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">Sign in</Button>
           </Form>
           <span>
-            Ainda não tem uma conta? <Link to="/signup">Registre-se</Link>
+            Don&apos;t have an account yet? <Link to="/signup">Sign up</Link>
           </span>
         </FormWrapper>
       </Content>

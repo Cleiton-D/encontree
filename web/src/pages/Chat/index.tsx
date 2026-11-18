@@ -170,7 +170,7 @@ const Chat = (): JSX.Element => {
 
   return (
     <Container>
-      <PageTitle>Conversa</PageTitle>
+      <PageTitle>Conversation</PageTitle>
       <Content>
         <ChatContainer>
           <MessageList>
@@ -188,7 +188,7 @@ const Chat = (): JSX.Element => {
           <MessageInputContainer>
             <MessageInput
               type="text"
-              placeholder="Digite uma mensagem"
+              placeholder="Type a message"
               ref={inputRef}
             />
             <SendMessageButton onClick={handleSendMessage}>
@@ -202,14 +202,14 @@ const Chat = (): JSX.Element => {
           <UserInfo>
             <Username>{user?.name}</Username>
             <Usernick>{user?.username}</Usernick>
-            <ServiceDescription>Último agendamento</ServiceDescription>
+            <ServiceDescription>Last appointment</ServiceDescription>
             <Separator />
             <ScheduleDate>
-              <strong>Data:</strong>
+              <strong>Date:</strong>
               <span>{lastSchedule?.dateFormatted}</span>
             </ScheduleDate>
             <ScheduleDate>
-              <strong>Horário:</strong>
+              <strong>Time:</strong>
               <span>{lastSchedule?.hourFormatted}</span>
             </ScheduleDate>
           </UserInfo>

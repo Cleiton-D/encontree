@@ -81,7 +81,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Container>
-      <PageTitle>Horários agendados</PageTitle>
+      <PageTitle>Scheduled appointments</PageTitle>
       <Content>
         <SchedulesContainer>
           {schedules.length > 0 ? (
@@ -115,7 +115,7 @@ const Dashboard = (): JSX.Element => {
             </Schedules>
           ) : (
             <EmptySchedulesText>
-              Nenhum agendamento para esta data :(
+              No appointments for this date :(
             </EmptySchedulesText>
           )}
         </SchedulesContainer>

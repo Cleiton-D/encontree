@@ -1,6 +1,6 @@
 type FindByProviderAndDayDTO = {
   providerId: string;
-  day: 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+  day: 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 };
 
 export default FindByProviderAndDayDTO;

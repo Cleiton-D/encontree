@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: encontree
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: encontree
 
     healthcheck:
@@ -20,7 +20,7 @@ services:
     environment:
       MONGODB_DATABASE: encontree
       MONGODB_USERNAME: encontree
-      MONGODB_PASSWORD: encontree
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD:?set MONGODB_PASSWORD in .env}
 
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo mongodb:27017/test --quiet
@@ -36,17 +36,17 @@ services:
       context: ./api
       dockerfile: Dockerfile
     environment:
-      APP_SECRET: fadsgklvabknafsvklsgdjksfnfjkbdnalvmasçldfmadsknbvlfsbn 
+      APP_SECRET: ${APP_SECRET:?set APP_SECRET in .env}
       APP_API_URL: http://127.0.0.1:3333
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
       POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: encontree
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: encontree
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
       MONGODB_USERNAME: encontree
-      MONGODB_PASSWORD: encontree
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
       MONGODB_DATABASE: encontree
 
     ports:

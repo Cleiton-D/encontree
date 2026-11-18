@@ -51,17 +51,17 @@ const SignIn = (): JSX.Element => {
       try {
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('Informe seu email'),
-          password: Yup.string().required('Informe sua senha'),
+            .email('Enter a valid email')
+            .required('Email is required'),
+          password: Yup.string().required('Password is required'),
         });
 
         await schema.validate(data, { abortEarly: false });
         await login({ email: data.email, password: data.password });
       } catch (err) {
         Alert.alert(
-          'Error na autenticação',
-          'Ocorreu um erro ao fazer login, cheque suas credenciais',
+          'Authentication failed',
+          'An error occurred while signing in, check your credentials',
         );
       }
     },
@@ -89,7 +89,7 @@ const SignIn = (): JSX.Element => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 name="email"
-                placeholder="Digite seu email"
+                placeholder="Enter your email"
                 returnKeyType="next"
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
               />
@@ -97,21 +97,21 @@ const SignIn = (): JSX.Element => {
                 ref={passwordInputRef}
                 secureTextEntry
                 name="password"
-                placeholder="Digite sua senha"
+                placeholder="Enter your password"
                 textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
               <Button onPress={() => formRef.current?.submitForm()}>
-                Entrar
+                Sign in
               </Button>
             </FormContainer>
           </Container>
         </KeyboardAvoidingView>
         <CreateAccountContainer>
-          <CreateAccountText>Ainda não tem uma conta?</CreateAccountText>
+          <CreateAccountText>Don&apos;t have an account yet?</CreateAccountText>
           <CreateAccountButton onPress={handleNavigateSignUp}>
-            <CreateAccountButtonText>Registre-se</CreateAccountButtonText>
+            <CreateAccountButtonText>Sign up</CreateAccountButtonText>
           </CreateAccountButton>
         </CreateAccountContainer>
       </ScrollView>

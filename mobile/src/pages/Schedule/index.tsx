@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { parseISO, format } from 'date-fns';
-import ptBr from 'date-fns/locale/pt-BR';
+import enUS from 'date-fns/locale/en-US';
 
 import { StackParamList } from '../../routes/app.routes';
 
@@ -53,8 +53,8 @@ const Schedule = (): JSX.Element => {
   const [formattedDate, formattedHour] = useMemo(() => {
     if (schedule) {
       const parsedDate = parseISO(schedule.date);
-      const date = format(parsedDate, "dd 'de' MMM'.,' yyyy", { locale: ptBr });
-      const hour = format(parsedDate, 'HH:00', { locale: ptBr });
+      const date = format(parsedDate, 'MMM dd, yyyy', { locale: enUS });
+      const hour = format(parsedDate, 'HH:00', { locale: enUS });
 
       return [date, hour];
     }
@@ -92,17 +92,17 @@ const Schedule = (): JSX.Element => {
         <ScheduleServiceDetails>
           <ScheduleTimeContainer>
             <ScheduleTimeItem>
-              <ScheduleTimeItemTitle>Data</ScheduleTimeItemTitle>
+              <ScheduleTimeItemTitle>Date</ScheduleTimeItemTitle>
               <ScheduleTimeItemValue>{formattedDate}</ScheduleTimeItemValue>
             </ScheduleTimeItem>
 
             <ScheduleTimeItem>
-              <ScheduleTimeItemTitle>Horário</ScheduleTimeItemTitle>
+              <ScheduleTimeItemTitle>Time</ScheduleTimeItemTitle>
               <ScheduleTimeItemValue>{formattedHour}</ScheduleTimeItemValue>
             </ScheduleTimeItem>
           </ScheduleTimeContainer>
           <ScheduleDescriptionContainer>
-            <ScheduleDescriptionTitle>Categoria</ScheduleDescriptionTitle>
+            <ScheduleDescriptionTitle>Category</ScheduleDescriptionTitle>
             <ScheduleDescriptionValue numberOfLines={4} ellipsizeMode="tail">
               {schedule?.provider.category.description}
             </ScheduleDescriptionValue>
@@ -112,7 +112,7 @@ const Schedule = (): JSX.Element => {
 
       <SendMessageButtonContainer>
         <Button icon="send" onPress={handleNavigate}>
-          Enviar mensagem
+          Send message
         </Button>
       </SendMessageButtonContainer>
     </Container>

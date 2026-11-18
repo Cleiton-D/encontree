@@ -105,7 +105,7 @@ const Search = (): JSX.Element => {
             )}
           />
         ) : (
-          <EmptyResults>Nenhum resultado encontrado :(</EmptyResults>
+          <EmptyResults>No results found :(</EmptyResults>
         )}
       </Container>
     </>

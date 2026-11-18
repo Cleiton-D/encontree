@@ -45,7 +45,7 @@ const Conversations = (): JSX.Element => {
 
   return (
     <Container>
-      <PageTitle>Conversas</PageTitle>
+      <PageTitle>Conversations</PageTitle>
       <Content>
         {conversations.length > 0 ? (
           <ChatList>
@@ -62,7 +62,7 @@ const Conversations = (): JSX.Element => {
           </ChatList>
         ) : (
           <EmptyConversationsText>
-            Você ainda não tem nenhuma conversa :(
+            You don&apos;t have any conversations yet :(
           </EmptyConversationsText>
         )}
       </Content>

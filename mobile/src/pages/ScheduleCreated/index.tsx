@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
-import ptBr from 'date-fns/locale/pt-BR';
+import enUS from 'date-fns/locale/en-US';
 
 import { StackParamList } from '../../routes/app.routes';
 
@@ -28,8 +28,8 @@ const ScheduleCreated = (): JSX.Element => {
     () =>
       format(
         parseISO(params.date),
-        "EEEE', 'dd 'de' MMMM 'de' yyyy 'às' HH:mm",
-        { locale: ptBr },
+        "EEEE', 'MMMM dd', 'yyyy 'at' HH:mm",
+        { locale: enUS },
       ),
     [params],
   );
@@ -48,9 +48,9 @@ const ScheduleCreated = (): JSX.Element => {
       </Header>
       <Content>
         <Icon name="check" size={80} color="#04D361" />
-        <ScheduleCreatedText>Agendamento concluido</ScheduleCreatedText>
+        <ScheduleCreatedText>Appointment booked</ScheduleCreatedText>
         <ScheduleDateText>{formattedDate}</ScheduleDateText>
-        <Button onPress={handleFinish}>Concluir</Button>
+        <Button onPress={handleFinish}>Finish</Button>
       </Content>
     </Container>
   );

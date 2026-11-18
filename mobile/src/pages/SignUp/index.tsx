@@ -52,28 +52,28 @@ const SignUp = (): JSX.Element => {
     async (data: SignUpFormData) => {
       try {
         const schema = Yup.object().shape({
-          name: Yup.string().required('Digite seu nome'),
-          username: Yup.string().required('Digite um nome de usuário'),
+          name: Yup.string().required('Enter your name'),
+          username: Yup.string().required('Enter a username'),
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('Informe seu email'),
-          password: Yup.string().required('Informe sua senha'),
+            .email('Enter a valid email')
+            .required('Email is required'),
+          password: Yup.string().required('Password is required'),
         });
 
         await schema.validate(data, { abortEarly: false });
         await api.post('/users', data);
 
         Alert.alert(
-          'Cadastro realizado com sucesso',
-          'Seu cadastro foi realizado com sucesso, faça login para continuar',
+          'Account created successfully',
+          'Your account was created successfully, sign in to continue',
         );
 
         navigation.goBack();
       } catch (err) {
         console.log(err);
         Alert.alert(
-          'Erro ao realizar cadastro',
-          'Ocorreu um erro na realização do cadastro, cheque seus dados',
+          'Sign up failed',
+          'An error occurred while creating your account, check your details',
         );
       }
     },
@@ -98,7 +98,7 @@ const SignUp = (): JSX.Element => {
               <Input
                 autoCapitalize="words"
                 name="name"
-                placeholder="Digite seu nome"
+                placeholder="Enter your name"
                 returnKeyType="next"
                 onSubmitEditing={() => emailInputRef.current?.focus()}
               />
@@ -108,7 +108,7 @@ const SignUp = (): JSX.Element => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 name="email"
-                placeholder="Digite seu email"
+                placeholder="Enter your email"
                 returnKeyType="next"
                 onSubmitEditing={() => usernameInputRef.current?.focus()}
               />
@@ -117,7 +117,7 @@ const SignUp = (): JSX.Element => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 name="username"
-                placeholder="Digite um nome de usuário"
+                placeholder="Enter a username"
                 returnKeyType="next"
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
               />
@@ -125,22 +125,22 @@ const SignUp = (): JSX.Element => {
                 ref={passwordInputRef}
                 secureTextEntry
                 name="password"
-                placeholder="Digite sua senha"
+                placeholder="Enter your password"
                 textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
               <Button onPress={() => formRef.current?.submitForm()}>
-                Entrar
+                Sign up
               </Button>
             </FormContainer>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
       <SignInContainer>
-        <SignInText>Já tem uma conta?</SignInText>
+        <SignInText>Already have an account?</SignInText>
         <SignInButton onPress={handleNavigateSignIn}>
-          <SignInButtonText>Entrar</SignInButtonText>
+          <SignInButtonText>Sign in</SignInButtonText>
         </SignInButton>
       </SignInContainer>
     </SafeAreaView>

@@ -27,21 +27,21 @@ const Header = (): JSX.Element => {
       <Content>
         <Logo to="/dashboard" />
         <Navigation>
-          <Notifications to="/conversations" title="Conversas">
+          <Notifications to="/conversations" title="Conversations">
             <FiMessageSquare size={26} color="#000" />
           </Notifications>
           <UserContent>
             <UserInfo>
               <Username>
-                Olá, <strong>{splittedName}</strong>
+                Hi, <strong>{splittedName}</strong>
               </Username>
-              <ProfileLink to="/profile">Meu perfil</ProfileLink>
+              <ProfileLink to="/profile">My profile</ProfileLink>
             </UserInfo>
             <UserAvatar avatarUrl={user.avatar_url} />
           </UserContent>
           <LogoutButton onClick={logout}>
             <FiPower size={24} color="#666" />
-            <span>Sair</span>
+            <span>Sign out</span>
           </LogoutButton>
         </Navigation>
       </Content>

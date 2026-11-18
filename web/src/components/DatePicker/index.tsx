@@ -8,21 +8,21 @@ const DatePicker = (props: DayPickerProps): JSX.Element => {
   return (
     <Container>
       <DayPicker
-        weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+        weekdaysShort={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
         modifiers={{ available: { daysOfWeek: [0, 1, 2, 3, 4, 5, 6] } }}
         months={[
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
         ]}
         {...props}
       />

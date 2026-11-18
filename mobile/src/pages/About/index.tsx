@@ -21,7 +21,6 @@ import {
   AdvisorContainer,
   AdvisorDetail,
   AdvisorName,
-  AdvisorContact,
   AppRepository,
   AppRepositoryLink,
   ReleaseDate,
@@ -31,24 +30,20 @@ const About = (): JSX.Element => (
   <ScrollView style={{ backgroundColor: '#fff' }}>
     <Container>
       <EncontreeLogo source={logo} />
-      <EncontreeVersion>Versão 1.0.1</EncontreeVersion>
+      <EncontreeVersion>Version 1.0.1</EncontreeVersion>
       <AppDescription>
-        O Encontree é um projeto open source utilizado inicalmente como parte do
-        Trabalho de Conclusão de Curso (TCC) do curso de Sistemas de Informação
-        das Faculdades Integradas de Cacoal - UNESC.
+        Encontree is an open source project originally built as the final
+        undergraduate project (TCC) of the Information Systems program at
+        Faculdades Integradas de Cacoal - UNESC.
       </AppDescription>
 
-      <Title>Autor:</Title>
+      <Title>Author:</Title>
       <AuthorContainer>
         <AuthorDetail>
           <AuthorImage source={me} />
           <AuthorName>Cleiton Dione Ahnerth Kiper</AuthorName>
         </AuthorDetail>
         <ContactContainer>
-          <ContactItem>
-            <Icon name="mail" size={20} color="#333" />
-            <ContactText>cleitonahnerth@gmail.com</ContactText>
-          </ContactItem>
           <ContactItem>
             <Icon name="linkedin" size={20} color="#333" />
             <ContactText>linkedin.com/in/cleitonkiper</ContactText>
@@ -60,17 +55,11 @@ const About = (): JSX.Element => (
         </ContactContainer>
       </AuthorContainer>
 
-      <Title>Orientador</Title>
+      <Title>Advisor</Title>
       <AdvisorContainer>
         <AdvisorDetail>
           <AdvisorName>Ideir Coto</AdvisorName>
         </AdvisorDetail>
-        <AdvisorContact>
-          <ContactItem>
-            <Icon name="mail" size={20} color="#333" />
-            <ContactText>prof.ideir@unescnet.br</ContactText>
-          </ContactItem>
-        </AdvisorContact>
       </AdvisorContainer>
 
       <AppRepository>
@@ -78,7 +67,7 @@ const About = (): JSX.Element => (
         <AppRepositoryLink>github.com/Cleiton-D/encontree</AppRepositoryLink>
       </AppRepository>
 
-      <ReleaseDate>14 de novembro de 2020</ReleaseDate>
+      <ReleaseDate>November 14, 2020</ReleaseDate>
     </Container>
   </ScrollView>
 );

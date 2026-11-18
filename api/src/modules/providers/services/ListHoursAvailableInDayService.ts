@@ -17,7 +17,7 @@ type ListHoursAvailableInDayResponse = Array<{
   available: boolean;
 }>;
 
-type Day = 'dom' | 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab';
+type Day = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 @injectable()
 class ListHoursAvailableInDayService {
@@ -36,7 +36,7 @@ class ListHoursAvailableInDayService {
     month,
     year,
   }: ListHoursAvailableInDayRequest): Promise<ListHoursAvailableInDayResponse> {
-    const daysOfWeek: Day[] = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    const daysOfWeek: Day[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     const date = new Date(year, month, day);
 
     const [schedules, workSchedule] = await Promise.all([

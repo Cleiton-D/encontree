@@ -83,7 +83,7 @@ const AppRoutes = (): JSX.Element => (
       options={{
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
-        headerTitle: 'Agendamento',
+        headerTitle: 'Appointment',
         headerTitleStyle: { fontSize: 22 },
       }}
     />
@@ -93,7 +93,7 @@ const AppRoutes = (): JSX.Element => (
       options={{
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
-        headerTitle: 'Conversas',
+        headerTitle: 'Conversations',
         headerTitleStyle: { fontSize: 22 },
       }}
     />
@@ -103,7 +103,7 @@ const AppRoutes = (): JSX.Element => (
       options={{
         headerBackImage: () => <Icon name="chevron-left" size={24} />,
         headerBackTitleVisible: false,
-        headerTitle: 'Sobre',
+        headerTitle: 'About',
         headerTitleStyle: { fontSize: 22 },
       }}
     />
