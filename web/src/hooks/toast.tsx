@@ -4,8 +4,8 @@ import * as uuid from 'uuid';
 import { Message, Container } from '../components/Toast';
 
 type ToastContextData = {
-  addToast: (message: Omit<Message, 'key'>) => void;
-  removeToast: (key: string) => void;
+  addToast: (message: Omit<Message, 'id'>) => void;
+  removeToast: (id: string) => void;
 };
 
 const ToastContext = createContext({} as ToastContextData);
@@ -18,9 +18,9 @@ const ToastProvider = ({ children }: ToastProviderProps): JSX.Element => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   const addToast = useCallback(
-    ({ type, title, description, time }: Omit<Message, 'key'>) => {
+    ({ type, title, description, time }: Omit<Message, 'id'>) => {
       const item = {
-        key: uuid.v4(),
+        id: uuid.v4(),
         type,
         title,
         description,
@@ -32,8 +32,8 @@ const ToastProvider = ({ children }: ToastProviderProps): JSX.Element => {
     [],
   );
 
-  const removeToast = useCallback((key: string) => {
-    setMessages(oldState => oldState.filter(item => item.key !== key));
+  const removeToast = useCallback((id: string) => {
+    setMessages(oldState => oldState.filter(item => item.id !== id));
   }, []);
 
   return (

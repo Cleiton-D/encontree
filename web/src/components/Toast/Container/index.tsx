@@ -10,7 +10,7 @@ type ContainerProps = {
 };
 
 export const Container = ({ children }: ContainerProps): JSX.Element => {
-  const withTransitions = useTransition(children, item => item.key, {
+  const withTransitions = useTransition(children, item => item.id, {
     from: { right: '-120%', opacity: 0 },
     enter: { right: '0%', opacity: 1 },
     leave: { right: '-120%', opacity: 0 },

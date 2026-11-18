@@ -10,7 +10,7 @@ import { useToast } from '../../hooks/toast';
 import { Container } from './styles';
 
 export type Message = {
-  key: string;
+  id: string;
   type?: 'success' | 'error' | 'warning' | 'info';
   title: string;
   description: string;
@@ -34,11 +34,11 @@ const Toast = ({ message, styles }: ToastProps): JSX.Element => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      removeToast(message.key);
+      removeToast(message.id);
     }, message.time || 3000);
 
     return () => clearTimeout(timer);
-  }, [message.key, message.time, removeToast]);
+  }, [message.id, message.time, removeToast]);
 
   return (
     <Container type={message.type || 'info'} style={styles}>
@@ -47,7 +47,7 @@ const Toast = ({ message, styles }: ToastProps): JSX.Element => {
         <strong>{message.title}</strong>
         {message.description && <p>{message.description}</p>}
       </div>
-      <button type="button" onClick={() => removeToast(message.key)}>
+      <button type="button" onClick={() => removeToast(message.id)}>
         <FiXCircle size={18} />
       </button>
     </Container>
